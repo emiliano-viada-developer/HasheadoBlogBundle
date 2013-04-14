@@ -1,0 +1,25 @@
+{
+    "name": "hasheado/blog-bundle",
+    "type": "symfony-bundle",
+    "description": "Blog bundle for use with Symfony2",
+    "keywords": ["blog", "bundle"],
+    "homepage": "http://github.com/Hasheado/BlogBundle",
+    "license": "MIT",
+    "authors": [
+        {
+            "name": "Emiliano Viada",
+            "email": "emjovi@gmail.com"
+        }
+    ],
+    "require": {
+        "php": ">=5.3.2"
+    },
+    "require-dev": {
+        "symfony/framework-bundle": ">=2.1,<2.2-dev"
+    },
+    "autoload": {
+        "psr-0": { "Hasheado\\BlogBundle": "" }
+    },
+    "minimum-stability": "dev",
+    "target-dir": "Hasheado/BlogBundle"
+}

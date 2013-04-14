@@ -1,0 +1,3 @@
+hasheado_blog_homepage:
+    pattern:  /
+    defaults: { _controller: HasheadoBlogBundle:Default:index }
