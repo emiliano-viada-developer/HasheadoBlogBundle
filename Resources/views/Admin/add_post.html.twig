@@ -1,0 +1,21 @@
+<h1>Add a Post</h1>
+
+<form action="" method="POST">
+	{{ form_errors(form) }}
+
+	<div>
+	    {{ form_label(form.title) }}
+	    {{ form_errors(form.title) }}
+	    {{ form_widget(form.title) }}
+	</div>
+
+	<div>
+	    {{ form_label(form.content) }}
+	    {{ form_errors(form.content) }}
+	    {{ form_widget(form.content) }}
+	</div>
+
+	{{ form_rest(form) }}
+
+	<input type="submit" name="submit_button" value="Submit" />
+</form>
