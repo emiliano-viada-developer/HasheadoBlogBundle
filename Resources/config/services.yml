@@ -1,0 +1,5 @@
+services:
+    hasheado_blog.sluggale.listener:
+        class: Hasheado\BlogBundle\EventListener\SluggableListener
+        tags:
+            - { name: doctrine.event_listener, event: prePersist }

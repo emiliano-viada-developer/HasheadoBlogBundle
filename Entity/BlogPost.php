@@ -30,6 +30,11 @@ class BlogPost
      */
     protected $content;
 
+    /**
+     * @ORM\Column(type="string", length=255, nullable=true, options={"default"=NULL})
+     */
+    protected $slug;
+
     /** setters **/
     public function setId($id)
     {
@@ -43,7 +48,12 @@ class BlogPost
 
     public function setContent($content)
     {
-    	$this->content = $content;
+        $this->content = $content;
+    }
+
+    public function setSlug($slug)
+    {
+        $this->slug = $slug;
     }
     /** end setters **/
 
@@ -62,6 +72,11 @@ class BlogPost
     public function getContent()
     {
     	return $this->content;
+    }
+
+    public function getSlug()
+    {
+        return $this->slug;
     }
     /** end getters **/
 }
