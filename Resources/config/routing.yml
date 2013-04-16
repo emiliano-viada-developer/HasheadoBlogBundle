@@ -3,6 +3,14 @@ hasheado_blog_homepage:
     defaults: { _controller: HasheadoBlogBundle:Default:index }
 
 #Admin routes
+hasheado_blog_admin_post_list:
+    pattern: /admin/posts
+    defaults: { _controller: HasheadoBlogBundle:Admin:postList }
+
 hasheado_blog_admin_post_add:
     pattern: /admin/post/add
     defaults: { _controller: HasheadoBlogBundle:Admin:addPost }
+
+hasheado_blog_admin_post_edit:
+    pattern: /admin/post/{id}
+    defaults: { _controller: HasheadoBlogBundle:Admin:editPost }

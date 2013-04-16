@@ -1,0 +1,32 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+{% block content %}
+	<h1>Posts List</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Title</th>
+				<th>Content</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if posts|length > 0 %}
+	            {% for post in posts %}
+	                <tr>
+	                    <td>{{ post.id }}</td>
+	                    <td>{{ post.title }}</td>
+	                    <td>{{ post.content }}</td>
+	                    <td><a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a></td>
+	                </tr>
+	            {% endfor %}
+	        {% else %}
+	            <tr>
+	                <td colspan="3">No results.</td>
+	            </tr>
+	        {% endif %}
+		</tbody>
+	</table>
+	<a href="{{ path('hasheado_blog_admin_post_add') }}">Add new Post</a>
+{% endblock %}

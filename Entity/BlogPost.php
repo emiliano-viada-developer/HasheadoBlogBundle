@@ -3,6 +3,7 @@
 namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
 
 /**
  * @ORM\Entity
@@ -19,11 +20,13 @@ class BlogPost
 
     /**
      * @ORM\Column(type="string", length=255)
+     * @Assert\NotBlank(message="This field is required.")
      */
     protected $title;
 
     /**
      * @ORM\Column(type="text")
+     * @Assert\NotBlank(message="This field is required.")
      */
     protected $content;
 
