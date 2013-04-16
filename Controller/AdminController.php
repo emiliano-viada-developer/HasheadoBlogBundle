@@ -3,8 +3,8 @@
 namespace Hasheado\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
-use Hasheado\BlogBundle\Entity\Post;
-use Hasheado\BlogBundle\Form\PostType;
+use Hasheado\BlogBundle\Entity\BlogPost as Post;
+use Hasheado\BlogBundle\Form\BlogPostType as PostType;
 
 class AdminController extends Controller
 {
