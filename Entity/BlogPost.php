@@ -4,10 +4,12 @@ namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
  * @ORM\Table(name="blog_post")
+ * @UniqueEntity("slug")
  */
 class BlogPost
 {
@@ -31,9 +33,19 @@ class BlogPost
     protected $content;
 
     /**
-     * @ORM\Column(type="string", length=255, nullable=true, options={"default"=NULL})
+     * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
      */
     protected $slug;
+
+    /**
+     * @ORM\Column(name="created_at", type="datetime")
+     */
+    protected $createdAt;
+
+    /**
+     * @ORM\Column(name="updated_at", type="datetime")
+     */
+    protected $updatedAt;
 
     /** setters **/
     public function setId($id)
@@ -54,6 +66,16 @@ class BlogPost
     public function setSlug($slug)
     {
         $this->slug = $slug;
+    }
+
+    public function setCreatedAt($createdAt)
+    {
+        $this->createdAt = $createdAt;
+    }
+
+    public function setupdatedAt($updatedAt)
+    {
+        $this->updatedAt = $updatedAt;
     }
     /** end setters **/
 
@@ -77,6 +99,16 @@ class BlogPost
     public function getSlug()
     {
         return $this->slug;
+    }
+
+    public function getCreatedAt()
+    {
+        return $this->createdAt;
+    }
+
+    public function getUpdatedAt()
+    {
+        return $this->updatedAt;
     }
     /** end getters **/
 }

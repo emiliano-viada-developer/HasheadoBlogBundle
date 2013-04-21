@@ -1,5 +1,5 @@
 services:
-    hasheado_blog.sluggale.listener:
-        class: Hasheado\BlogBundle\EventListener\SluggableListener
+    hasheado_blog.behaviors.listener:
+        class: Hasheado\BlogBundle\EventListener\BehaviorsListener
         tags:
-            - { name: doctrine.event_listener, event: prePersist }
+            - { name: doctrine.event_listener, event: onFlush }
