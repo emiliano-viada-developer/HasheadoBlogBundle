@@ -17,6 +17,12 @@
 		    {{ form_widget(form.content) }}
 		</div>
 
+		<div>
+		    {{ form_label(form.isPublished, 'is published?') }}
+		    {{ form_errors(form.isPublished) }}
+		    {{ form_widget(form.isPublished) }}
+		</div>
+
 		{{ form_rest(form) }}
 
 		<input type="submit" name="submit_button" value="Add" />

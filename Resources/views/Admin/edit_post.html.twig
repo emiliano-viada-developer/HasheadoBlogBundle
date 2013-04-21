@@ -2,7 +2,7 @@
 {% block content %}
 	<h1>Edit Post</h1>
 
-	<form action="{{ path('hasheado_blog_admin_post_edit', { 'id': post_id }) }}" method="POST">
+	<form action="{{ path('hasheado_blog_admin_post_edit', { 'id': post_id }) }}" method="POST" novalidate>
 		{{ form_errors(form) }}
 
 		<div>
@@ -15,6 +15,12 @@
 		    {{ form_label(form.content) }}
 		    {{ form_errors(form.content) }}
 		    {{ form_widget(form.content) }}
+		</div>
+
+		<div>
+		    {{ form_label(form.isPublished, 'is published?') }}
+		    {{ form_errors(form.isPublished) }}
+		    {{ form_widget(form.isPublished) }}
 		</div>
 
 		{{ form_rest(form) }}

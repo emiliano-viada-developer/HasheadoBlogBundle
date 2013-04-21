@@ -33,6 +33,16 @@ class BlogPost
     protected $content;
 
     /**
+     * @ORM\Column(type="boolean", options={"default"=FALSE})
+     */
+    protected $isPublished;
+
+    /**
+     * @ORM\Column(name="published_at", type="datetime")
+     */
+    protected $publishedAt;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
      */
     protected $slug;
@@ -61,6 +71,22 @@ class BlogPost
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    public function setIsPublished($isPublished)
+    {
+        $this->isPublished = $isPublished;
+
+        //Set the publishedAt field
+        if ($this->isPublished &&
+            (is_null($this->publishedAt) || strtotime($this->publishedAt->format('Y-m-d')) < 0)) {
+            $this->setPublishedAt(new \Datetime());
+        }
+    }
+
+    public function setPublishedAt($publishedAt)
+    {
+        $this->publishedAt = $publishedAt;
     }
 
     public function setSlug($slug)
@@ -94,6 +120,16 @@ class BlogPost
     public function getContent()
     {
     	return $this->content;
+    }
+
+    public function getIsPublished()
+    {
+        return $this->isPublished;
+    }
+
+    public function getPublishedAt()
+    {
+        return $this->publishedAt;
     }
 
     public function getSlug()
