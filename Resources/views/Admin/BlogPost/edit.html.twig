@@ -26,6 +26,7 @@
 		{{ form_rest(form) }}
 
 		<input type="submit" name="submit_button" value="Edit" />
-		<a href="{{ path('hasheado_blog_admin_post_list') }}">Cancel</a>
+		<a href="{{ path('hasheado_blog_admin_post_list') }}">Cancel</a> &nbsp;
+		<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post_id }) }}">Delete</a>
 	</form>
 {% endblock %}

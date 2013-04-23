@@ -5,16 +5,16 @@ hasheado_blog_homepage:
 #Admin routes
 hasheado_blog_admin_post_list:
     pattern: /admin/posts
-    defaults: { _controller: HasheadoBlogBundle:Admin:postList }
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:list }
 
 hasheado_blog_admin_post_add:
     pattern: /admin/post/add
-    defaults: { _controller: HasheadoBlogBundle:Admin:addPost }
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:add }
 
 hasheado_blog_admin_post_edit:
     pattern: /admin/post/{id}
-    defaults: { _controller: HasheadoBlogBundle:Admin:editPost }
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:edit }
 
 hasheado_blog_admin_post_delete:
     pattern: /admin/post/{id}/delete
-    defaults: { _controller: HasheadoBlogBundle:Admin:deletePost }
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:delete }

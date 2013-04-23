@@ -38,7 +38,7 @@ class BlogPost
     protected $isPublished;
 
     /**
-     * @ORM\Column(name="published_at", type="datetime")
+     * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     protected $publishedAt;
 

@@ -1,30 +1,30 @@
 <?php
 
-namespace Hasheado\BlogBundle\Controller;
+namespace Hasheado\BlogBundle\Controller\Admin;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogPost as Post;
 use Hasheado\BlogBundle\Form\BlogPostType as PostType;
 
-class AdminController extends Controller
+class BlogPostController extends Controller
 {
     /**
-     * PostList action
+     * List action
      */
-    public function postListAction()
+    public function listAction()
     {
         $em = $this->getDoctrine()->getManager();
         $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->findAll();
 
-        return $this->render('HasheadoBlogBundle:Admin:post_list.html.twig', array(
+        return $this->render('HasheadoBlogBundle:Admin\BlogPost:list.html.twig', array(
             'posts' => $posts,
         ));
     }
 
     /**
-     * AddPost action
+     * Add action
      */
-    public function addPostAction()
+    public function addAction()
     {
         $request = $this->getRequest();
         $session = $this->get('session');
@@ -48,15 +48,15 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('HasheadoBlogBundle:Admin:add_post.html.twig', array(
+        return $this->render('HasheadoBlogBundle:Admin\BlogPost:add.html.twig', array(
         	'form' => $form->createView(),
     	));
     }
 
     /**
-     * EditPost action
+     * Edit action
      */
-    public function editPostAction($id)
+    public function editAction($id)
     {
         $em = $this->getDoctrine()->getManager();
         $request = $this->getRequest();
@@ -87,16 +87,16 @@ class AdminController extends Controller
             }
         }
 
-        return $this->render('HasheadoBlogBundle:Admin:edit_post.html.twig', array(
+        return $this->render('HasheadoBlogBundle:Admin\BlogPost:edit.html.twig', array(
             'form' => $form->createView(),
             'post_id' => $id
         ));
     }
 
     /**
-     * DeletePost action
+     * Delete action
      */
-    public function deletePostAction($id)
+    public function deleteAction($id)
     {
         $em = $this->getDoctrine()->getEntityManager();
         $post = $em->getRepository('HasheadoBlogBundle:BlogPost')->find($id);
