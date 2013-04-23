@@ -14,3 +14,7 @@ hasheado_blog_admin_post_add:
 hasheado_blog_admin_post_edit:
     pattern: /admin/post/{id}
     defaults: { _controller: HasheadoBlogBundle:Admin:editPost }
+
+hasheado_blog_admin_post_delete:
+    pattern: /admin/post/{id}/delete
+    defaults: { _controller: HasheadoBlogBundle:Admin:deletePost }

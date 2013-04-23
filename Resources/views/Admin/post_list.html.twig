@@ -18,7 +18,10 @@
 	                    <td>{{ post.id }}</td>
 	                    <td>{{ post.title }}</td>
 	                    <td>{{ post.content }}</td>
-	                    <td><a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a></td>
+	                    <td>
+	                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a> &nbsp;&nbsp;
+	                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">Delete</a>
+	                    </td>
 	                </tr>
 	            {% endfor %}
 	        {% else %}

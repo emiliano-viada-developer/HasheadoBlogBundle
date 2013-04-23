@@ -92,4 +92,24 @@ class AdminController extends Controller
             'post_id' => $id
         ));
     }
+
+    /**
+     * DeletePost action
+     */
+    public function deletePostAction($id)
+    {
+        $em = $this->getDoctrine()->getEntityManager();
+        $post = $em->getRepository('HasheadoBlogBundle:BlogPost')->find($id);
+        if ($post) {
+            $em->remove($post);
+            $em->flush();
+
+            $this->get('session')->getFlashBag()->add('success', 'The post was deleted successfully.');
+
+        } else {
+            throw $this->createNotFoundException('Unable to find post.');
+        }
+
+        return $this->redirect($this->generateUrl('hasheado_blog_admin_post_list'));
+    }
 }
