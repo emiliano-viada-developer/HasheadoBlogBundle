@@ -53,9 +53,22 @@ class BehaviorsListener
 		$class = get_class($entity);
 		if (property_exists($class, 'slug')) {
 			
-			$slug = Util::urlize($entity->getTitle(), "'");
+			switch ($class) {
+				case 'Hasheado\BlogBundle\Entity\BlogPost':
+					$sluggable_field = $entity->getTitle();
+					$repository = $em->getRepository('HasheadoBlogBundle:BlogPost');
+					break;
+				case 'Hasheado\BlogBundle\Entity\BlogCategory':
+					$sluggable_field = $entity->getName();
+					$repository = $em->getRepository('HasheadoBlogBundle:BlogCategory');
+					break;
+				default:
+					break;
+			}
+
+			$slug = Util::urlize($sluggable_field, "'");
 			//Check uniqueness
-			$ocurrences = $em->getRepository('HasheadoBlogBundle:BlogPost')->findBy(array(
+			$ocurrences = $repository->findBy(array(
 				'slug' => $slug
 			));
 			$ocurrences = count($ocurrences);

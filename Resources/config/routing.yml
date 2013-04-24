@@ -3,6 +3,8 @@ hasheado_blog_homepage:
     defaults: { _controller: HasheadoBlogBundle:Default:index }
 
 #Admin routes
+
+#Post
 hasheado_blog_admin_post_list:
     pattern: /admin/posts
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:list }
@@ -18,3 +20,21 @@ hasheado_blog_admin_post_edit:
 hasheado_blog_admin_post_delete:
     pattern: /admin/post/{id}/delete
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:delete }
+
+#Category
+hasheado_blog_admin_category_list:
+    pattern: /admin/categories
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:list }
+
+hasheado_blog_admin_category_add:
+    pattern: /admin/category/add
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:add }
+
+hasheado_blog_admin_category_edit:
+    pattern: /admin/category/{id}
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:edit }
+
+hasheado_blog_admin_category_delete:
+    pattern: /admin/category/{id}/delete
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:delete }
+#End Admin routes

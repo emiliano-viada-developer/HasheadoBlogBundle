@@ -1,0 +1,33 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+{% block content %}
+	<h1>Categories List</h1>
+
+	<table>
+		<thead>
+			<tr>
+				<th>Id</th>
+				<th>Name</th>
+				<th>Actions</th>
+			</tr>
+		</thead>
+		<tbody>
+			{% if categories|length > 0 %}
+	            {% for category in categories %}
+	                <tr>
+	                    <td>{{ category.id }}</td>
+	                    <td>{{ category.name }}</td>
+	                    <td>
+	                    	<a href="{{ path('hasheado_blog_admin_category_edit', { 'id': category.id }) }}">Edit</a> &nbsp;&nbsp;
+	                    	<a href="{{ path('hasheado_blog_admin_category_delete', { 'id': category.id }) }}">Delete</a>
+	                    </td>
+	                </tr>
+	            {% endfor %}
+	        {% else %}
+	            <tr>
+	                <td colspan="3">No results.</td>
+	            </tr>
+	        {% endif %}
+		</tbody>
+	</table>
+	<a href="{{ path('hasheado_blog_admin_category_add') }}">Add new Category</a>
+{% endblock %}

@@ -1,0 +1,19 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+{% block content %}
+	<h1>Add a Category</h1>
+
+	<form action="{{ path('hasheado_blog_admin_category_add') }}" method="POST">
+		{{ form_errors(form) }}
+
+		<div>
+		    {{ form_label(form.name) }}
+		    {{ form_errors(form.name) }}
+		    {{ form_widget(form.name) }}
+		</div>
+
+		{{ form_rest(form) }}
+
+		<input type="submit" name="submit_button" value="Add" />
+		<a href="{{ path('hasheado_blog_admin_category_list') }}">Cancel</a>
+	</form>
+{% endblock %}
