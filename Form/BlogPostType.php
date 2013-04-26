@@ -17,6 +17,7 @@ class BlogPostType extends AbstractType
     {
         $builder->add('title');
         $builder->add('content');
+        $builder->add('category');
         $builder->add('isPublished', null, array('required' => false));
     }
 

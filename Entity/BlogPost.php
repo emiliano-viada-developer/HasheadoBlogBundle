@@ -33,6 +33,12 @@ class BlogPost
     protected $content;
 
     /**
+     * @ORM\ManyToOne(targetEntity="BlogCategory", inversedBy="posts")
+     * @ORM\JoinColumn(name="category_id", referencedColumnName="id")
+     */
+    protected $category;
+
+    /**
      * @ORM\Column(type="boolean", options={"default"=FALSE})
      */
     protected $isPublished;
@@ -71,6 +77,11 @@ class BlogPost
     public function setContent($content)
     {
         $this->content = $content;
+    }
+
+    public function setCategory($category)
+    {
+        $this->category = $category;
     }
 
     public function setIsPublished($isPublished)
@@ -119,7 +130,12 @@ class BlogPost
 
     public function getContent()
     {
-    	return $this->content;
+        return $this->content;
+    }
+
+    public function getCategory()
+    {
+        return $this->category;
     }
 
     public function getIsPublished()

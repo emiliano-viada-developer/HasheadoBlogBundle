@@ -3,6 +3,7 @@
 namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -27,6 +28,11 @@ class BlogCategory
     protected $name;
 
     /**
+     * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="category")
+     */
+    protected $posts;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
      */
     protected $slug;
@@ -41,6 +47,19 @@ class BlogCategory
      */
     protected $updatedAt;
 
+    /** Contructor **/
+    public function __contruct()
+    {
+        $this->posts = new ArrayCollection();
+    }
+
+    /** magic methods **/
+    public function __toString()
+    {
+        return $this->name;
+    }
+    /** End magic methods **/    
+
     /** setters **/
     public function setId($id)
     {
@@ -50,6 +69,11 @@ class BlogCategory
     public function setName($name)
     {
     	$this->name = $name;
+    }
+
+    public function setPosts(ArrayCollection $posts)
+    {
+        $this->posts = $posts;
     }
 
     public function setSlug($slug)
@@ -76,7 +100,12 @@ class BlogCategory
 
     public function getName()
     {
-    	return $this->name;
+        return $this->name;
+    }
+
+    public function getPosts()
+    {
+        return $this->posts;
     }
 
     public function getSlug()
