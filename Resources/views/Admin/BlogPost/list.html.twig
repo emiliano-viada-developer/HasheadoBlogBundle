@@ -7,7 +7,8 @@
 			<tr>
 				<th>Id</th>
 				<th>Title</th>
-				<th>Content</th>
+				<th>Category</th>
+				<th>Published</th>
 				<th>Actions</th>
 			</tr>
 		</thead>
@@ -17,7 +18,8 @@
 	                <tr>
 	                    <td>{{ post.id }}</td>
 	                    <td>{{ post.title }}</td>
-	                    <td>{{ post.content }}</td>
+	                    <td>{{ post.category }}</td>
+	                    <td>{{ post.isPublished }}</td>
 	                    <td>
 	                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a> &nbsp;&nbsp;
 	                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">Delete</a>
@@ -26,7 +28,7 @@
 	            {% endfor %}
 	        {% else %}
 	            <tr>
-	                <td colspan="4">No results.</td>
+	                <td colspan="5">No results.</td>
 	            </tr>
 	        {% endif %}
 		</tbody>
