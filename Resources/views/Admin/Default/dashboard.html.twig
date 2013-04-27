@@ -1,0 +1,13 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+{% block content %}
+	<h1>Dashboard</h1>
+
+	<div>
+		<p>Your blog has:</p>
+		<ul>
+			<li>{{ categories }} Categories.</li>
+			<li>{{ posts }} Posts.</li>
+			<li>{{ comments }} Comments.</li>
+		</ul>
+	</div>
+{% endblock %}

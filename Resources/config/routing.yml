@@ -4,6 +4,11 @@ hasheado_blog_homepage:
 
 #Admin routes
 
+#Dashboard
+hasheado_blog_admin_dashboard:
+    pattern: /admin/dashboard
+    defaults: { _controller: HasheadoBlogBundle:Admin\Default:index }
+
 #Post
 hasheado_blog_admin_post_list:
     pattern: /admin/posts
