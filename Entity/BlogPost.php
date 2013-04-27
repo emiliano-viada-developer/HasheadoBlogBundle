@@ -3,6 +3,7 @@
 namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -39,7 +40,7 @@ class BlogPost
     protected $category;
 
     /**
-     * @ORM\Column(type="boolean", options={"default"=FALSE})
+     * @ORM\Column(name="is_published", type="boolean", options={"default"=FALSE})
      */
     protected $isPublished;
 
@@ -47,6 +48,11 @@ class BlogPost
      * @ORM\Column(name="published_at", type="datetime", nullable=true)
      */
     protected $publishedAt;
+
+    /**
+     * @ORM\OneToMany(targetEntity="BlogComment", mappedBy="post")
+     */
+    protected $comments;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
@@ -62,6 +68,19 @@ class BlogPost
      * @ORM\Column(name="updated_at", type="datetime")
      */
     protected $updatedAt;
+
+    /** Contructor **/
+    public function __contruct()
+    {
+        $this->comments = new ArrayCollection();
+    }
+
+    /** magic methods **/
+    public function __toString()
+    {
+        return $this->getTitle();
+    }
+    /** End magic methods **/
 
     /** setters **/
     public function setId($id)
@@ -98,6 +117,11 @@ class BlogPost
     public function setPublishedAt($publishedAt)
     {
         $this->publishedAt = $publishedAt;
+    }
+
+    public function setComments(ArrayCollection $comments)
+    {
+        $this->comments = $comments;
     }
 
     public function setSlug($slug)
@@ -146,6 +170,11 @@ class BlogPost
     public function getPublishedAt()
     {
         return $this->publishedAt;
+    }
+
+    public function getComments()
+    {
+        return $this->comments;
     }
 
     public function getSlug()

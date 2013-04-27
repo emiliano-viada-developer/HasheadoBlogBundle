@@ -1,0 +1,38 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+{% block content %}
+	<h1>Edit Comment</h1>
+
+	<form action="{{ path('hasheado_blog_admin_comment_edit', { 'id': comment_id }) }}" method="POST">
+		{{ form_errors(form) }}
+
+		<div>
+		    {{ form_label(form.userEmail, 'user email') }}
+		    {{ form_errors(form.userEmail) }}
+		    {{ form_widget(form.userEmail) }}
+		</div>
+
+		<div>
+		    {{ form_label(form.post) }}
+		    {{ form_errors(form.post) }}
+		    {{ form_widget(form.post) }}
+		</div>
+
+		<div>
+		    {{ form_label(form.content) }}
+		    {{ form_errors(form.content) }}
+		    {{ form_widget(form.content) }}
+		</div>
+
+		<div>
+		    {{ form_label(form.isAccepted, 'Accepted?') }}
+		    {{ form_errors(form.isAccepted) }}
+		    {{ form_widget(form.isAccepted) }}
+		</div>
+
+		{{ form_rest(form) }}
+
+		<input type="submit" name="submit_button" value="Edit" />
+		<a href="{{ path('hasheado_blog_admin_comment_list') }}">Cancel</a> &nbsp;
+		<a href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment_id }) }}">Delete</a>
+	</form>
+{% endblock %}

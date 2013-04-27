@@ -37,4 +37,21 @@ hasheado_blog_admin_category_edit:
 hasheado_blog_admin_category_delete:
     pattern: /admin/category/{id}/delete
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:delete }
+
+#Comment
+hasheado_blog_admin_comment_list:
+    pattern: /admin/comments
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogComment:list }
+
+hasheado_blog_admin_comment_add:
+    pattern: /admin/comment/add
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogComment:add }
+
+hasheado_blog_admin_comment_edit:
+    pattern: /admin/comment/{id}
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogComment:edit }
+
+hasheado_blog_admin_comment_delete:
+    pattern: /admin/comment/{id}/delete
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogComment:delete }
 #End Admin routes

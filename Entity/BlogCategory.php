@@ -56,7 +56,7 @@ class BlogCategory
     /** magic methods **/
     public function __toString()
     {
-        return $this->name;
+        return $this->getName();
     }
     /** End magic methods **/    
 
