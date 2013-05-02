@@ -52,18 +52,44 @@ class DefaultController extends Controller
             $form = $this->createForm(new CommentType(), $comment);
 
             $form->bind($request);
+            $post = $comment->getPost();
             if ($form->isValid()) {
                 $comment->setIsAccepted(false);
                 $em = $this->getDoctrine()->getManager();
                 $em->persist($comment);
                 $em->flush();
-                $post = $comment->getPost();
                 
-                return $this->redirect($this->generateUrl('hasheado_blog_post_detail', array('slug' => $post->getSlug())) . '#comment-' . $comment->getId());
+                return $this->redirect(
+                    $this->generateUrl('hasheado_blog_post_detail', array('slug' => $post->getSlug())) . '#comment-' . $comment->getId()
+                );
+
+            } else { //If it's not valid, render comment form with errors.
+                return $this->render('HasheadoBlogBundle:Default:post_detail.html.twig', array(
+                    'post' => $post,
+                    'form' => $form->createView(),
+                ));
             }
 
         } else {
             throw $this->createNotFoundException('Page not found.');
         }
+    }
+
+    /** Posts by category */
+    public function byCategoryAction($slug)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $category = $em->getRepository('HasheadoBlogBundle:BlogCategory')->findOneBySlug($slug);
+
+        if (!$category) {
+            throw $this->createNotFoundException(
+                'No category found for slug '.$slug
+            );
+        }
+
+        return $this->render('HasheadoBlogBundle:Default:by_category.html.twig', array(
+            'category' => $category,
+            'posts' => $category->getPosts(),
+        ));
     }
 }

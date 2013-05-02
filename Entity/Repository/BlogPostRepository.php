@@ -14,7 +14,11 @@ class BlogPostRepository extends EntityRepository
 	{
 		$em = $this->getEntityManager();
 		$query = $em->createQuery(
-    		'SELECT p FROM HasheadoBlogBundle:BlogPost p WHERE p.isPublished = 1 ORDER BY p.publishedAt DESC'
+    		'SELECT p, c
+    		 FROM HasheadoBlogBundle:BlogPost p
+    		 LEFT JOIN p.comments c
+    		 WHERE p.isPublished = 1
+    		 ORDER BY p.publishedAt DESC'
 		);
 
 		$posts = $query->getResult();

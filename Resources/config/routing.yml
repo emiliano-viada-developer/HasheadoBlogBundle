@@ -10,6 +10,10 @@ hasheado_blog_comment_post:
     pattern:  /comment/post
     defaults: { _controller: HasheadoBlogBundle:Default:comment }
 
+hasheado_blog_post_by_category:
+    pattern:  /category/{slug}
+    defaults: { _controller: HasheadoBlogBundle:Default:byCategory }
+
 #Admin routes
 
 #Dashboard
