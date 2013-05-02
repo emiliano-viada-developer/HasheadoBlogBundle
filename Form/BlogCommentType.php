@@ -15,6 +15,8 @@ class BlogCommentType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('userEmail');
+        $builder->add('userName');
+        $builder->add('web');
         $builder->add('post');
         $builder->add('content');
         $builder->add('isAccepted', null, array('required' => false));

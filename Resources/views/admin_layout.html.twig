@@ -1,0 +1,19 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Blog - Admin{% endblock %}
+
+{% block stylesheets %}{% endblock stylesheets %}
+
+{% block body %}
+	
+	<ul>
+		<li><a href="{{ path('hasheado_blog_admin_category_list') }}">Categories</a></li>
+		<li><a href="{{ path('hasheado_blog_admin_post_list') }}">Posts</a></li>
+		<li><a href="{{ path('hasheado_blog_admin_comment_list') }}">Comments</a></li>
+	</ul>
+
+	{% block content %}{% endblock %}
+
+{% endblock %}
+
+{% block javascripts %}{% endblock javascripts %}

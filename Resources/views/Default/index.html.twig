@@ -1,1 +1,31 @@
-<h1>My Blog</h1>
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+
+{% block content %}
+	<h1>My Blog Homepage</h1>
+
+	<section>
+	
+		{% if posts|length > 0 %}
+			
+			{% for post in posts %}
+				<article>
+					<header>
+						<h2>
+							<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}">{{ post.title }}</a>
+						</h2>
+						<p>Posted on
+							<time datetime="{{ post.publishedAt.format('c') }}">{{ post.publishedAt.format('F jS Y') }}</time> -
+							<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}#comments">{{ post.comments|length }} comments</a>
+						</p>
+					</header>
+					<p>{{ post.content }}</p>
+				</article>
+			{% endfor %}
+
+		{% else %}
+			<p>No posts found.</p>
+		{% endif %}
+		
+	</section>
+
+{% endblock %}

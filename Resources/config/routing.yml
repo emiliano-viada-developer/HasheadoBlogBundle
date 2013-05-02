@@ -2,6 +2,14 @@ hasheado_blog_homepage:
     pattern:  /
     defaults: { _controller: HasheadoBlogBundle:Default:index }
 
+hasheado_blog_post_detail:
+    pattern:  /{slug}
+    defaults: { _controller: HasheadoBlogBundle:Default:postDetail }
+
+hasheado_blog_comment_post:
+    pattern:  /comment/post
+    defaults: { _controller: HasheadoBlogBundle:Default:comment }
+
 #Admin routes
 
 #Dashboard

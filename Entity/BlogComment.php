@@ -36,6 +36,17 @@ class BlogComment
     protected $userEmail;
 
     /**
+     * @ORM\Column(name="user_name", type="string", length=255)
+     */
+    protected $userName;
+
+    /**
+     * @ORM\Column(type="string", length=255)
+     * @Assert\Url()
+     */
+    protected $web;
+
+    /**
      * @ORM\Column(type="text")
      * @Assert\NotBlank(message="This field is required.")
      */
@@ -76,7 +87,17 @@ class BlogComment
 
     public function setUserEmail($userEmail)
     {
-    	$this->userEmail = $userEmail;
+        $this->userEmail = $userEmail;
+    }
+
+    public function setUserName($userName)
+    {
+        $this->userName = $userName;
+    }
+
+    public function setWeb($web)
+    {
+        $this->web = $web;
     }
 
     public function setContent($content)
@@ -113,7 +134,17 @@ class BlogComment
 
     public function getUserEmail()
     {
-    	return $this->userEmail;
+        return $this->userEmail;
+    }
+
+    public function getUserName()
+    {
+        return $this->userName;
+    }
+
+    public function getWeb()
+    {
+        return $this->web;
     }
 
     public function getContent()

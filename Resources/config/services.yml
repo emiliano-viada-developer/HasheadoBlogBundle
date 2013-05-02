@@ -3,3 +3,8 @@ services:
         class: Hasheado\BlogBundle\EventListener\BehaviorsListener
         tags:
             - { name: doctrine.event_listener, event: onFlush }
+    hasheado_blog.entity_id.type:
+        class: Hasheado\BlogBundle\Form\Type\EntityIdType
+        arguments: [@doctrine]
+        tags:
+            - { name: form.type, alias: entity_id }
