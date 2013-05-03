@@ -5,19 +5,35 @@ namespace Hasheado\BlogBundle\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
 use Hasheado\BlogBundle\Form\BlogCommentType as CommentType;
+use Hasheado\BlogBundle\Util\Paginator;
 
 class BlogCommentController extends Controller
 {
 	/**
      * List action
      */
-    public function listAction()
+    public function listAction($page = 1)
     {
         $em = $this->getDoctrine()->getManager();
-        $comments = $em->getRepository('HasheadoBlogBundle:BlogComment')->findAll();
+        $entities = $em->getRepository('HasheadoBlogBundle:BlogComment')->findAll();
+
+        $paginator = Paginator::getInfo(
+            count($entities),                                        //Total of records
+            $this->container->getParameter('admin_items_per_list'),  //Items per list
+            $page,                                                   //Page number
+            'hasheado_blog_admin_comment_pagination'                 //Route to paginate
+        );
+
+        $comments = $em->getRepository('HasheadoBlogBundle:BlogComment')->findBy(
+            array(), //Criteria (Filtering)
+            array(/*$orderBy => $sortMode*/), //OrderBy (Sortering)
+            $paginator['per_page'],
+            $paginator['offset']
+        );
 
         return $this->render('HasheadoBlogBundle:Admin\BlogComment:list.html.twig', array(
             'comments' => $comments,
+            'paginator' => $paginator
         ));
     }
 

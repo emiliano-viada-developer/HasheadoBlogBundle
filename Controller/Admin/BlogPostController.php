@@ -5,19 +5,35 @@ namespace Hasheado\BlogBundle\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogPost as Post;
 use Hasheado\BlogBundle\Form\BlogPostType as PostType;
+use Hasheado\BlogBundle\Util\Paginator;
 
 class BlogPostController extends Controller
 {
     /**
      * List action
      */
-    public function listAction()
+    public function listAction($page = 1)
     {
         $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->findAll();
+        $entities = $em->getRepository('HasheadoBlogBundle:BlogPost')->findAll();
+
+        $paginator = Paginator::getInfo(
+            count($entities),                                        //Total of records
+            $this->container->getParameter('admin_items_per_list'),  //Items per list
+            $page,                                                   //Page number
+            'hasheado_blog_admin_post_pagination'                    //Route to paginate
+        );
+
+        $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->findBy(
+            array(), //Criteria (Filtering)
+            array(/*$orderBy => $sortMode*/), //OrderBy (Sortering)
+            $paginator['per_page'],
+            $paginator['offset']
+        );
 
         return $this->render('HasheadoBlogBundle:Admin\BlogPost:list.html.twig', array(
             'posts' => $posts,
+            'paginator' => $paginator
         ));
     }
 

@@ -1,0 +1,26 @@
+{% if paginator.have_to_paginate %}
+    <div class="paginator mbl">
+        <span>{{ paginator.offset }}-{{ paginator.until }} de {{ paginator.total }}</span>
+        <nav>
+            <ul>
+                {% if paginator.page > 1 %}
+                    <li><a href="{{ path(paginator.route, { 'page': '1' }) }}"><i class="icon-backward"></i></a></li>
+                    <li><a href="{{ path(paginator.route, { 'page': paginator.left }) }}"><i class="icon-step-backward"></i></a></li>
+                {% endif %}
+                {% for i in paginator.pages_to_show.init..paginator.pages_to_show.end %}
+                    <li {% if paginator.page == i %} class="active" {% endif %}>
+                        {% if paginator.page == i %}
+                            {{ i }}
+                        {% else %}
+                            <a href="{{ path(paginator.route, { 'page': i }) }}">{{ i }}</a>
+                        {% endif %}
+                    </li>
+                {% endfor %}
+                {% if paginator.page != paginator.num_pages %}
+                    <li><a href="{{ path(paginator.route, { 'page': paginator.right }) }}"><i class="icon-step-forward"></i></a></li>
+                    <li><a href="{{ path(paginator.route, { 'page': paginator.num_pages }) }}"><i class="icon-forward"></i></a></li>
+                {% endif %}
+            </ul>
+        </nav>
+    </div>
+{% endif %}
