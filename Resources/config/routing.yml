@@ -30,6 +30,10 @@ hasheado_blog_admin_post_pagination:
     pattern:  /admin/posts/page/{page}
     defaults: { _controller: "HasheadoBlogBundle:Admin\BlogPost:list", page: 1 }
 
+hasheado_blog_admin_post_filter:
+    pattern:  /admin/posts/filter/{field}/{mode}
+    defaults: { _controller: "HasheadoBlogBundle:Admin\BlogPost:filter" }
+
 hasheado_blog_admin_post_add:
     pattern: /admin/post/add
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:add }
@@ -51,6 +55,10 @@ hasheado_blog_admin_category_pagination:
     pattern:  /admin/categories/page/{page}
     defaults: { _controller: "HasheadoBlogBundle:Admin\BlogCategory:list", page: 1 }
 
+hasheado_blog_admin_category_filter:
+    pattern:  /admin/categories/filter/{field}/{mode}
+    defaults: { _controller: "HasheadoBlogBundle:Admin\BlogCategory:filter" }
+
 hasheado_blog_admin_category_add:
     pattern: /admin/category/add
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogCategory:add }
@@ -71,6 +79,10 @@ hasheado_blog_admin_comment_list:
 hasheado_blog_admin_comment_pagination:
     pattern:  /admin/comments/page/{page}
     defaults: { _controller: "HasheadoBlogBundle:Admin\BlogComment:list", page: 1 }
+
+hasheado_blog_admin_comment_filter:
+    pattern:  /admin/comments/filter/{field}/{mode}
+    defaults: { _controller: "HasheadoBlogBundle:Admin\BlogComment:filter" }
 
 hasheado_blog_admin_comment_add:
     pattern: /admin/comment/add

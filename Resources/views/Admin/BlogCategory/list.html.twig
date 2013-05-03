@@ -5,8 +5,12 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Id</th>
-				<th>Name</th>
+				<th>
+					<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+				</th>
+				<th>
+					<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'name', 'mode': sort_mode_reverse }) }}" title="Sort by Name">Name</a>
+				</th>
 				<th>Actions</th>
 			</tr>
 		</thead>

@@ -5,9 +5,13 @@
 	<table>
 		<thead>
 			<tr>
-				<th>Id</th>
+				<th>
+					<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+				</th>
 				<th>Post</th>
-				<th>User Email</th>
+				<th>
+					<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'userEmail', 'mode': sort_mode_reverse }) }}" title="Sort by User Email">User Email</a>
+				</th>
 				<th>Content</th>
 				<th>Accepted</th>
 				<th>Actions</th>

@@ -17,6 +17,9 @@ class BlogCommentController extends Controller
         $em = $this->getDoctrine()->getManager();
         $entities = $em->getRepository('HasheadoBlogBundle:BlogComment')->findAll();
 
+        //Sorting
+        list($orderBy, $sortMode, $sortModeReverse) = $this->sorting();
+
         $paginator = Paginator::getInfo(
             count($entities),                                        //Total of records
             $this->container->getParameter('admin_items_per_list'),  //Items per list
@@ -26,15 +29,36 @@ class BlogCommentController extends Controller
 
         $comments = $em->getRepository('HasheadoBlogBundle:BlogComment')->findBy(
             array(), //Criteria (Filtering)
-            array(/*$orderBy => $sortMode*/), //OrderBy (Sortering)
+            array($orderBy => $sortMode), //OrderBy (Sortering)
             $paginator['per_page'],
             $paginator['offset']
         );
 
         return $this->render('HasheadoBlogBundle:Admin\BlogComment:list.html.twig', array(
             'comments' => $comments,
-            'paginator' => $paginator
+            'paginator' => $paginator,
+            'orderBy' => $orderBy,
+            'sort_mode_reverse' => $sortModeReverse,
         ));
+    }
+
+    /**
+     * Filter action
+     */
+    public function filterAction($field, $mode)
+    {
+        $session = $this->get('session');
+
+        $sort = array(
+            'comment' => array(
+                'field' => $field,
+                'mode' => $mode
+            )
+        );
+
+        $session->set('sort', json_encode($sort));
+
+        return $this->redirect($this->generateUrl('hasheado_blog_admin_comment_list'));
     }
 
     /**
@@ -127,5 +151,25 @@ class BlogCommentController extends Controller
         }
 
         return $this->redirect($this->generateUrl('hasheado_blog_admin_comment_list'));
+    }
+
+    /**
+     * sorting method
+     */
+    protected function sorting()
+    {
+        $session = $this->get('session');
+
+        $orderBy = "id";
+        $sortMode = "ASC";
+        $sortModeReverse = "DESC";
+        if ($session->has('sort')) {
+            $sort = json_decode($session->get('sort'), true);
+            $orderBy = (isset($sort['comment']))? $sort['comment']['field'] : $orderBy;
+            $sortMode = (isset($sort['comment']))? $sort['comment']['mode'] : $sortMode;
+            $sortModeReverse = ($sortMode == "ASC")? "DESC" : "ASC";
+        }
+
+        return array($orderBy, $sortMode, $sortModeReverse);
     }
 }
