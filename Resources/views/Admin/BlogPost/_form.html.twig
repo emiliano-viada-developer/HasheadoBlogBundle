@@ -1,0 +1,48 @@
+{% set edit_mode = (form.vars.value.id != null)? true : false %}
+{% set action_route = (edit_mode)? path('hasheado_blog_admin_post_edit', { 'id': post_id }) : path('hasheado_blog_admin_post_add') %}
+<form action="{{ action_route }}" method="POST" class="form-horizontal" novalidate>
+	{{ form_errors(form) }}
+
+	<div class="control-group {% if form.title.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.title, 'Title', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.title) }}
+	    	{{ form_errors(form.title) }}
+	    </div>
+	</div>
+
+	<div class="control-group {% if form.category.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.category, 'Category', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.category) }}
+	    	{{ form_errors(form.category) }}
+	    </div>
+	</div>
+
+	<div class="control-group {% if form.content.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.content, 'Content', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.content) }}
+	    	{{ form_errors(form.content) }}
+	    </div>
+	</div>
+
+	<div class="control-group {% if form.isPublished.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.isPublished, 'Published?', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.isPublished) }}
+	    	{{ form_errors(form.isPublished) }}
+	    </div>
+	</div>
+
+	{{ form_rest(form) }}
+
+	<div class="form-actions">
+		{% set btn_label = (edit_mode)? 'Edit' : 'Add' %}
+		<input class="btn btn-primary" type="submit" name="submit_button" value="{{ btn_label }}" />
+		<a class="btn" href="{{ path('hasheado_blog_admin_post_list') }}">Cancel</a>
+		{% if (edit_mode) %}
+			<a class="btn btn-danger" href="{{ path('hasheado_blog_admin_post_delete', { 'id': post_id }) }}">Delete</a>
+		{% endif %}
+	</div>
+</form>

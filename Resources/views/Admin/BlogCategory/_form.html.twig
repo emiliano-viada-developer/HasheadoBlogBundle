@@ -1,0 +1,24 @@
+{% set edit_mode = (form.vars.value.id != null)? true : false %}
+{% set action_route = (edit_mode)? path('hasheado_blog_admin_category_edit', { 'id': category_id }) : path('hasheado_blog_admin_category_add') %}
+<form action="{{ action_route }}" method="POST" class="form-horizontal">
+	{{ form_errors(form) }}
+
+	<div class="control-group {% if form.name.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.name, 'Name', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.name) }}
+	    	{{ form_errors(form.name) }}
+	    </div>
+	</div>
+
+	{{ form_rest(form) }}
+
+	<div class="form-actions">
+		{% set btn_label = (edit_mode)? 'Edit' : 'Add' %}
+		<input class="btn btn-primary" type="submit" name="submit_button" value="{{ btn_label }}" />
+		<a class="btn" href="{{ path('hasheado_blog_admin_category_list') }}">Cancel</a>
+		{% if (edit_mode) %}
+			<a class="btn btn-danger" href="{{ path('hasheado_blog_admin_category_delete', { 'id': category_id }) }}">Delete</a>
+		{% endif %}
+	</div>
+</form>

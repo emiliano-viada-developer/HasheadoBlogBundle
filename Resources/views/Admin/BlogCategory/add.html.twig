@@ -1,19 +1,14 @@
 {% extends 'HasheadoBlogBundle::admin_layout.html.twig' %}
 {% block content %}
-	<h1>Add a Category</h1>
+	<div class="row-fluid sortable">
+		<div class="box span12">
 
-	<form action="{{ path('hasheado_blog_admin_category_add') }}" method="POST">
-		{{ form_errors(form) }}
-
-		<div>
-		    {{ form_label(form.name) }}
-		    {{ form_errors(form.name) }}
-		    {{ form_widget(form.name) }}
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-edit"></i> Add a Category</h2>
+			</div>
+			<div class="box-content">
+				{% include 'HasheadoBlogBundle:Admin/BlogCategory:_form.html.twig' %}
+			</div>
 		</div>
-
-		{{ form_rest(form) }}
-
-		<input type="submit" name="submit_button" value="Add" />
-		<a href="{{ path('hasheado_blog_admin_category_list') }}">Cancel</a>
-	</form>
+	</div>
 {% endblock %}

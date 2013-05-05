@@ -1,32 +1,14 @@
 {% extends 'HasheadoBlogBundle::admin_layout.html.twig' %}
 {% block content %}
-	<h1>Edit Post</h1>
+	<div class="row-fluid sortable">
+		<div class="box span12">
 
-	<form action="{{ path('hasheado_blog_admin_post_edit', { 'id': post_id }) }}" method="POST">
-		{{ form_errors(form) }}
-
-		<div>
-		    {{ form_label(form.title) }}
-		    {{ form_errors(form.title) }}
-		    {{ form_widget(form.title) }}
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-edit"></i> Edit Post</h2>
+			</div>
+			<div class="box-content">
+				{% include 'HasheadoBlogBundle:Admin/BlogPost:_form.html.twig' %}
+			</div>
 		</div>
-
-		<div>
-		    {{ form_label(form.content) }}
-		    {{ form_errors(form.content) }}
-		    {{ form_widget(form.content) }}
-		</div>
-
-		<div>
-		    {{ form_label(form.isPublished, 'is published?') }}
-		    {{ form_errors(form.isPublished) }}
-		    {{ form_widget(form.isPublished) }}
-		</div>
-
-		{{ form_rest(form) }}
-
-		<input type="submit" name="submit_button" value="Edit" />
-		<a href="{{ path('hasheado_blog_admin_post_list') }}">Cancel</a> &nbsp;
-		<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post_id }) }}">Delete</a>
-	</form>
+	</div>
 {% endblock %}

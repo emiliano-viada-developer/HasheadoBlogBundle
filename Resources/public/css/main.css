@@ -15,6 +15,12 @@
 	position: relative;
 	top: -50px;
 }
+.error .controls ul {
+	display: inline-block;
+	list-style-type: none;
+	margin-left: 5px;
+	color: #b94a48;
+}
 /* Overide Bootstrap CSS */
 .navbar-inner {
 	-webkit-border-radius: 0 !important;

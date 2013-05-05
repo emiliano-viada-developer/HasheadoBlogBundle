@@ -17,7 +17,9 @@ class BlogCommentType extends AbstractType
         $builder->add('userEmail');
         $builder->add('userName');
         $builder->add('web');
-        $builder->add('post');
+        $builder->add('post', null, array(
+            'empty_value' => 'Choose an option',
+        ));
         $builder->add('content');
         $builder->add('isAccepted', null, array('required' => false));
     }
