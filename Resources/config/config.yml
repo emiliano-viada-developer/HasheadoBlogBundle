@@ -1,3 +1,9 @@
 #config.yml on HasheadoBlogBundle
 parameters:
+  blog_title: 'Hasheado Blog'
   admin_items_per_list: 10
+
+#Config for twig templates
+twig:
+  globals:
+    blog_title: %blog_title%

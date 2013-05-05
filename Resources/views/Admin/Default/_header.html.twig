@@ -2,12 +2,9 @@
 <div class="navbar">
 	<div class="navbar-inner">
 		<div class="container-fluid">
-			<a class="btn btn-navbar" data-toggle="collapse" data-target=".top-nav.nav-collapse,.sidebar-nav.nav-collapse">
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
-				<span class="icon-bar"></span>
+			<a class="brand" href="{{ path('hasheado_blog_admin_dashboard') }}">
+				<span>{{ blog_title }} Admin</span>
 			</a>
-			<a class="brand" href="index.html"> <img alt="Charisma Logo" src="img/logo20.png" /> <span>Blog Admin</span></a>
 			
 			<!-- user dropdown -->
 			<div class="btn-group pull-right" >
@@ -24,7 +21,7 @@
 			
 			<div class="top-nav nav-collapse">
 				<ul class="nav">
-					<li><a href="#">Visit Site</a></li>
+					<li><a href="{{ path('hasheado_blog_homepage') }}" target="_blank">[ Visit Site ]</a></li>
 				</ul>
 			</div><!--/.nav-collapse -->
 		</div>

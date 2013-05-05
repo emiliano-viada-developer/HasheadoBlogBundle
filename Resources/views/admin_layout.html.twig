@@ -4,10 +4,10 @@
 
 {% block stylesheets %}
 	{% stylesheets 
-		'@HasheadoBlogBundle/Resources/public/bootstrap/css/bootstrap-responsive.css'
-		'@HasheadoBlogBundle/Resources/public/bootstrap/css/bootstrap-classic.css'
-		'@HasheadoBlogBundle/Resources/public/bootstrap/css/charisma-app.css'
-		'@HasheadoBlogBundle/Resources/public/css/main.css' %}
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.css'
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-classic.css'
+		'bundles/hasheadoblog/bootstrap/css/charisma-app.css'
+		'bundles/hasheadoblog/css/main.css' filter='cssrewrite' %}
 		<link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
 	{% endstylesheets %}
 {% endblock stylesheets %}
@@ -52,7 +52,7 @@
 	<hr/>
 
 	<footer>
-		<p class="pull-left">&copy; 2013</p>
+		<p class="text-center">&copy; 2013 - {{ blog_title }}</p>
 	</footer>
 
 {% endblock %}

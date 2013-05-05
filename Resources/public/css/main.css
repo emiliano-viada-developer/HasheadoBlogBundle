@@ -29,5 +29,6 @@
 }
 .brand {
 	font-family: inherit !important;
+	width: 260px;
 }
 /* END Overide Bootstrap CSS */
