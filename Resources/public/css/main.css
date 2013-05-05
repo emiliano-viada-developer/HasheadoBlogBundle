@@ -1,0 +1,27 @@
+/**
+ * main.css CSS file for admin @HasheadoBlogBundle
+ * @author Emiliano Viada
+ */
+
+.text-center {
+	text-align: center !important;
+}
+.pagination span {
+	padding-right: 20px;
+	position: relative;
+	top: -12px;
+}
+.top-50 {
+	position: relative;
+	top: -50px;
+}
+/* Overide Bootstrap CSS */
+.navbar-inner {
+	-webkit-border-radius: 0 !important;
+	-moz-border-radius: 0 !important;
+	border-radius: 0 !important;
+}
+.brand {
+	font-family: inherit !important;
+}
+/* END Overide Bootstrap CSS */

@@ -1,43 +1,53 @@
 {% extends 'HasheadoBlogBundle::admin_layout.html.twig' %}
 {% block content %}
-	<h1>Posts List</h1>
+	<div class="row-fluid sortable">		
+		<div class="box span12">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-user"></i> Posts</h2>
+			</div>
 
-	<table>
-		<thead>
-			<tr>
-				<th>
-					<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
-				</th>
-				<th>
-					<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'title', 'mode': sort_mode_reverse }) }}" title="Sort by Title">Title</a>
-				</th>
-				<th>Category</th>
-				<th>Published</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if posts|length > 0 %}
-	            {% for post in posts %}
-	                <tr>
-	                    <td>{{ post.id }}</td>
-	                    <td>{{ post.title }}</td>
-	                    <td>{{ post.category }}</td>
-	                    <td>{{ post.isPublished }}</td>
-	                    <td>
-	                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a> &nbsp;&nbsp;
-	                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">Delete</a>
-	                    </td>
-	                </tr>
-	            {% endfor %}
-	        {% else %}
-	            <tr>
-	                <td colspan="5">No results.</td>
-	            </tr>
-	        {% endif %}
-		</tbody>
-	</table>
-	<a href="{{ path('hasheado_blog_admin_post_add') }}">Add new Post</a>
+			<div class="box-content">
+				<table class="table table-striped table-bordered bootstrap-datatable datatable">
+					<thead>
+						<tr>
+							<th>
+								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+							</th>
+							<th>
+								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'title', 'mode': sort_mode_reverse }) }}" title="Sort by Title">Title</a>
+							</th>
+							<th>Category</th>
+							<th>Published</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if posts|length > 0 %}
+				            {% for post in posts %}
+				                <tr>
+				                    <td>{{ post.id }}</td>
+				                    <td>{{ post.title }}</td>
+				                    <td>{{ post.category }}</td>
+				                    <td>{{ post.isPublished }}</td>
+				                    <td>
+				                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a> &nbsp;&nbsp;
+				                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">Delete</a>
+				                    </td>
+				                </tr>
+				            {% endfor %}
+				        {% else %}
+				            <tr>
+				                <td class="text-center" colspan="5">No results.</td>
+				            </tr>
+				        {% endif %}
+					</tbody>
+				</table>
+				
+				{% include 'HasheadoBlogBundle:Admin/Default:paginator.html.twig' %}
 
-	{% include 'HasheadoBlogBundle:Admin/Default:paginator.html.twig' %}
+				{% set minus_top = (paginator.have_to_paginate)? 'top-50' : null %}
+				<a class="btn btn-success {{ minus_top }}" href="{{ path('hasheado_blog_admin_post_add') }}">Add new Post</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}

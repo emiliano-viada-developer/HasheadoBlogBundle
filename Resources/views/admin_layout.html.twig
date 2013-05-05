@@ -2,17 +2,56 @@
 
 {% block title %}Blog - Admin{% endblock %}
 
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+	{% stylesheets 
+		'@HasheadoBlogBundle/Resources/public/bootstrap/css/bootstrap-responsive.css'
+		'@HasheadoBlogBundle/Resources/public/bootstrap/css/bootstrap-classic.css'
+		'@HasheadoBlogBundle/Resources/public/bootstrap/css/charisma-app.css'
+		'@HasheadoBlogBundle/Resources/public/css/main.css' %}
+		<link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock stylesheets %}
 
 {% block body %}
 	
-	<ul>
-		<li><a href="{{ path('hasheado_blog_admin_category_list') }}">Categories</a></li>
-		<li><a href="{{ path('hasheado_blog_admin_post_list') }}">Posts</a></li>
-		<li><a href="{{ path('hasheado_blog_admin_comment_list') }}">Comments</a></li>
-	</ul>
+	<!-- Header (Topbar) -->
+	{% include 'HasheadoBlogBundle:Admin/Default:_header.html.twig' %}
 
-	{% block content %}{% endblock %}
+	<div class="container-fluid">
+		<div class="row-fluid">
+
+			<!-- sidebar menu -->
+			{% include 'HasheadoBlogBundle:Admin/Default:_aside_menu.html.twig' %}
+			
+			<noscript>
+				<div class="alert alert-block span10">
+					<h4 class="alert-heading">Warning!</h4>
+					<p>You need to have <a href="http://en.wikipedia.org/wiki/JavaScript" target="_blank">JavaScript</a> enabled to use this site.</p>
+				</div>
+			</noscript>
+
+			<!-- content starts -->
+			<div id="content" class="span10">
+
+				<div>
+					<ul class="breadcrumb">
+						<li><a href="#">Home</a> <span class="divider">/</span></li>
+						<li><a href="#">Tables</a></li>
+					</ul>
+				</div>
+
+				{% block content %}{% endblock %}
+
+			</div>
+
+		</div>
+	</div> <!-- END container-fluid -->
+
+	<hr/>
+
+	<footer>
+		<p class="pull-left">&copy; 2013</p>
+	</footer>
 
 {% endblock %}
 

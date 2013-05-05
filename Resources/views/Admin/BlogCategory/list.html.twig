@@ -1,39 +1,49 @@
 {% extends 'HasheadoBlogBundle::admin_layout.html.twig' %}
 {% block content %}
-	<h1>Categories List</h1>
+	<div class="row-fluid sortable">		
+		<div class="box span12">
+			<div class="box-header well" data-original-title>
+				<h2><i class="icon-user"></i> Categories</h2>
+			</div>
 
-	<table>
-		<thead>
-			<tr>
-				<th>
-					<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
-				</th>
-				<th>
-					<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'name', 'mode': sort_mode_reverse }) }}" title="Sort by Name">Name</a>
-				</th>
-				<th>Actions</th>
-			</tr>
-		</thead>
-		<tbody>
-			{% if categories|length > 0 %}
-	            {% for category in categories %}
-	                <tr>
-	                    <td>{{ category.id }}</td>
-	                    <td>{{ category.name }}</td>
-	                    <td>
-	                    	<a href="{{ path('hasheado_blog_admin_category_edit', { 'id': category.id }) }}">Edit</a> &nbsp;&nbsp;
-	                    	<a href="{{ path('hasheado_blog_admin_category_delete', { 'id': category.id }) }}">Delete</a>
-	                    </td>
-	                </tr>
-	            {% endfor %}
-	        {% else %}
-	            <tr>
-	                <td colspan="3">No results.</td>
-	            </tr>
-	        {% endif %}
-		</tbody>
-	</table>
-	<a href="{{ path('hasheado_blog_admin_category_add') }}">Add new Category</a>
+			<div class="box-content">
+				<table class="table table-striped table-bordered bootstrap-datatable datatable">
+					<thead>
+						<tr>
+							<th>
+								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+							</th>
+							<th>
+								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'name', 'mode': sort_mode_reverse }) }}" title="Sort by Name">Name</a>
+							</th>
+							<th>Actions</th>
+						</tr>
+					</thead>
+					<tbody>
+						{% if categories|length > 0 %}
+				            {% for category in categories %}
+				                <tr>
+				                    <td>{{ category.id }}</td>
+				                    <td>{{ category.name }}</td>
+				                    <td>
+				                    	<a href="{{ path('hasheado_blog_admin_category_edit', { 'id': category.id }) }}">Edit</a> &nbsp;&nbsp;
+				                    	<a href="{{ path('hasheado_blog_admin_category_delete', { 'id': category.id }) }}">Delete</a>
+				                    </td>
+				                </tr>
+				            {% endfor %}
+				        {% else %}
+				            <tr>
+				                <td class="text-center" colspan="3">No results.</td>
+				            </tr>
+				        {% endif %}
+					</tbody>
+				</table>
+				
+				{% include 'HasheadoBlogBundle:Admin/Default:paginator.html.twig' %}
 
-	{% include 'HasheadoBlogBundle:Admin/Default:paginator.html.twig' %}
+				{% set minus_top = (paginator.have_to_paginate)? 'top-50' : null %}
+				<a class="btn btn-success {{ minus_top }}" href="{{ path('hasheado_blog_admin_category_add') }}">Add new Category</a>
+			</div>
+		</div>
+	</div>
 {% endblock %}
