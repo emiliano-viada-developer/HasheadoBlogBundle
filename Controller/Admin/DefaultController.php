@@ -20,4 +20,45 @@ class DefaultController extends Controller
         	'comments' => $comments,
     	));
     }
+
+    /** Breadcrumb */
+    public function breadcrumbAction($current_route)
+    {
+        $categoriesRoutes = array('hasheado_blog_admin_category_list', 'hasheado_blog_admin_category_pagination',
+                                'hasheado_blog_admin_category_add', 'hasheado_blog_admin_category_edit');
+        $postsRoutes = array('hasheado_blog_admin_post_list', 'hasheado_blog_admin_post_pagination',
+                                'hasheado_blog_admin_post_add', 'hasheado_blog_admin_post_edit');
+        $commentsRoutes = array('hasheado_blog_admin_comment_list', 'hasheado_blog_admin_comment_pagination',
+                                'hasheado_blog_admin_comment_add', 'hasheado_blog_admin_comment_edit');
+
+        $breadcrumb = array(
+            0 => array(
+                'route' => 'hasheado_blog_admin_dashboard',
+                'label' => 'Home'
+            )
+        );
+
+        if ($current_route == 'hasheado_blog_admin_dashboard') {
+            $breadcrumb[1]['label'] = 'Dashboard';
+        } elseif (in_array($current_route, $categoriesRoutes)) {
+            $breadcrumb[1]['route'] = 'hasheado_blog_admin_category_list';
+            $breadcrumb[1]['label'] = 'Categories';
+        } elseif (in_array($current_route, $postsRoutes)) {
+            $breadcrumb[1]['route'] = 'hasheado_blog_admin_post_list';
+            $breadcrumb[1]['label'] = 'Posts';
+        } elseif (in_array($current_route, $commentsRoutes)) {
+            $breadcrumb[1]['route'] = 'hasheado_blog_admin_comment_list';
+            $breadcrumb[1]['label'] = 'Comments';
+        }
+
+        if (stristr($current_route, 'add')) {
+            $breadcrumb[2]['label'] = 'Add';
+        } elseif (stristr($current_route, 'edit')) {
+            $breadcrumb[2]['label'] = 'Edit';
+        }
+
+        return $this->render('HasheadoBlogBundle:Admin\Default:breadcrumb.html.twig', array(
+            'breadcrumb' => $breadcrumb,
+        ));
+    }
 }

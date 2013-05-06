@@ -1,0 +1,14 @@
+<div>
+	<ul class="breadcrumb">
+		{% for step in breadcrumb %}
+			<li>
+				{% if (step.route is defined) %}<a href="{{ path(step.route) }}">{% endif %}
+				{{ step.label }}
+				{% if (step.route is defined) %}</a>{% endif %}
+				{% if not loop.last %}
+					<span class="divider">/</span>
+				{% endif %}
+			</li>
+		{% endfor %}
+	</ul>
+</div>

@@ -33,12 +33,7 @@
 			<!-- content starts -->
 			<div id="content" class="span10">
 
-				<div>
-					<ul class="breadcrumb">
-						<li><a href="#">Home</a> <span class="divider">/</span></li>
-						<li><a href="#">Tables</a></li>
-					</ul>
-				</div>
+				{% render(controller('HasheadoBlogBundle:Admin/Default:breadcrumb', { current_route: app.request.attributes.get('_route') })) %}
 
 				{% include 'HasheadoBlogBundle:Admin/Default:_flash_messages.html.twig' %}
 
