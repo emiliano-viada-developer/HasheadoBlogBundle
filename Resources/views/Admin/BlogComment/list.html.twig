@@ -11,11 +11,23 @@
 					<thead>
 						<tr>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+								<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">
+									Id
+									{% if orderBy == 'id' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>Post</th>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'userEmail', 'mode': sort_mode_reverse }) }}" title="Sort by User Email">User Email</a>
+								<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': 'userEmail', 'mode': sort_mode_reverse }) }}" title="Sort by User Email">
+									User Email
+									{% if orderBy == 'userEmail' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>Content</th>
 							<th>Accepted</th>
@@ -30,10 +42,14 @@
 				                    <td>{{ comment.post }}</td>
 				                    <td>{{ comment.userEmail }}</td>
 				                    <td>{{ comment.content }}</td>
-				                    <td>{{ comment.isAccepted }}</td>
+				                    <td>{% if comment.isAccepted %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_comment_edit', { 'id': comment.id }) }}">Edit</a> &nbsp;&nbsp;
-				                    	<a href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment.id }) }}">Delete</a>
+				                    	<a href="{{ path('hasheado_blog_admin_comment_edit', { 'id': comment.id }) }}">
+				                    		<i class="icon-pencil"></i> Edit
+				                    	</a> &nbsp;&nbsp;
+				                    	<a href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment.id }) }}">
+				                    		<i class="icon-remove"></i> Delete
+				                    	</a>
 				                    </td>
 				                </tr>
 				            {% endfor %}

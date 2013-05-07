@@ -11,10 +11,22 @@
 					<thead>
 						<tr>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">
+									Id
+									{% if orderBy == 'id' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'title', 'mode': sort_mode_reverse }) }}" title="Sort by Title">Title</a>
+								<a href="{{ path('hasheado_blog_admin_post_filter', { 'field': 'title', 'mode': sort_mode_reverse }) }}" title="Sort by Title">
+									Title
+									{% if orderBy == 'title' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>Category</th>
 							<th>Published</th>
@@ -28,10 +40,14 @@
 				                    <td>{{ post.id }}</td>
 				                    <td>{{ post.title }}</td>
 				                    <td>{{ post.category }}</td>
-				                    <td>{{ post.isPublished }}</td>
+				                    <td>{% if post.isPublished %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">Edit</a> &nbsp;&nbsp;
-				                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">Delete</a>
+				                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">
+				                    		<i class="icon-pencil"></i> Edit
+				                    	</a> &nbsp;&nbsp;
+				                    	<a href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">
+				                    		<i class="icon-remove"></i> Delete
+				                    	</a>
 				                    </td>
 				                </tr>
 				            {% endfor %}

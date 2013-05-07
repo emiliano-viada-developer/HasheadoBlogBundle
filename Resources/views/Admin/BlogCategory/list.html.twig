@@ -11,10 +11,22 @@
 					<thead>
 						<tr>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">Id</a>
+								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'id', 'mode': sort_mode_reverse }) }}" title="Sort by Id">
+									Id
+									{% if orderBy == 'id' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>
-								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'name', 'mode': sort_mode_reverse }) }}" title="Sort by Name">Name</a>
+								<a href="{{ path('hasheado_blog_admin_category_filter', { 'field': 'name', 'mode': sort_mode_reverse }) }}" title="Sort by Name">
+									Name
+									{% if orderBy == 'name' %}
+										{% set icon_class = (sort_mode_reverse == 'ASC')? 'icon-chevron-down' : 'icon-chevron-up' %}
+										<i class="{{ icon_class }}"></i>
+									{% endif %}
+								</a>
 							</th>
 							<th>Actions</th>
 						</tr>
@@ -26,8 +38,12 @@
 				                    <td>{{ category.id }}</td>
 				                    <td>{{ category.name }}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_category_edit', { 'id': category.id }) }}">Edit</a> &nbsp;&nbsp;
-				                    	<a href="{{ path('hasheado_blog_admin_category_delete', { 'id': category.id }) }}">Delete</a>
+				                    	<a href="{{ path('hasheado_blog_admin_category_edit', { 'id': category.id }) }}">
+				                    		<i class="icon-pencil"></i> Edit
+				                    	</a> &nbsp;&nbsp;
+				                    	<a href="{{ path('hasheado_blog_admin_category_delete', { 'id': category.id }) }}">
+				                    		<i class="icon-remove"></i> Delete
+				                    	</a>
 				                    </td>
 				                </tr>
 				            {% endfor %}
