@@ -16,6 +16,14 @@ hasheado_blog_post_by_category:
 
 #Admin routes
 
+hasheado_blog_admin_login:
+    pattern:   /admin/login
+    defaults:  { _controller: HasheadoBlogBundle:Admin\Security:login }
+hasheado_blog_admin_login_check:
+    pattern:   /admin/login_check
+hasheado_blog_admin_logout:
+    pattern: /admin/logout
+
 #Dashboard
 hasheado_blog_admin_dashboard:
     pattern: /admin/dashboard

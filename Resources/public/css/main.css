@@ -31,4 +31,13 @@
 	font-family: inherit !important;
 	width: 260px;
 }
+.input-prepend .add-on {
+	margin-right: -5px;
+}
+.input-prepend input.mih {
+	min-height: 28px;
+}
+.input-prepend label.remember input {
+	margin-top: -2px;
+}
 /* END Overide Bootstrap CSS */

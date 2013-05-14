@@ -1,0 +1,33 @@
+{% extends '::base.html.twig' %}
+
+{% block title %}Blog - Admin{% endblock %}
+
+{% block stylesheets %}
+	{% stylesheets 
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-classic.css'
+		'bundles/hasheadoblog/bootstrap/css/charisma-app.css'
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.min.css'
+		'bundles/hasheadoblog/css/main.css' filter='cssrewrite' %}
+		<link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock stylesheets %}
+
+{% block body %}
+	
+	<div class="container-fluid">
+		<div class="row-fluid">
+
+			{% block content %}{% endblock %}
+
+		</div>
+	</div> <!-- END container-fluid -->
+
+	<hr/>
+
+	<footer>
+		<p class="text-center">&copy; 2013 - {{ blog_title }}</p>
+	</footer>
+
+{% endblock %}
+
+{% block javascripts %}{% endblock javascripts %}
