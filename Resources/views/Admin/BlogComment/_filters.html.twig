@@ -1,0 +1,59 @@
+<div class="row-fluid sortable">
+	<div class="box span12">
+		<div class="box-header well" data-original-title="">
+			<h2><i class="icon-search"></i> Filters</h2>
+			<div class="box-icon">
+				<a href="#" class="btn btn-minimize btn-round"><i class="icon-chevron-up"></i></a>
+			</div>
+		</div>
+		<div class="box-content">
+			<form action="{{  path('hasheado_blog_admin_comment_filter', { 'field': orderBy, 'mode': sort_mode }) }}" method="post" class="form-horizontal">
+				<fieldset>
+					<div class="row">
+						<div class="control-group span4 {% if filter_form.post.vars.errors|length %}error{% endif %}">
+							{{ form_label(filter_form.post, 'Post', { 'label_attr': {'class': 'control-label'} }) }}
+							<div class="controls">
+							    {{ form_widget(filter_form.post) }}
+		    					{{ form_errors(filter_form.post) }}
+							</div>
+						</div>
+
+						<div class="control-group span4 {% if filter_form.content.vars.errors|length %}error{% endif %}">
+							{{ form_label(filter_form.content, 'Content', { 'label_attr': {'class': 'control-label'} }) }}
+							<div class="controls">
+							    {{ form_widget(filter_form.content) }}
+		    					{{ form_errors(filter_form.content) }}
+							</div>
+						</div>
+
+						<div class="control-group span4 {% if filter_form.isAccepted.vars.errors|length %}error{% endif %}">
+							{{ form_label(filter_form.isAccepted, 'Accepted?', { 'label_attr': {'class': 'control-label'} }) }}
+							<div class="controls">
+								{{ form_widget(filter_form.isAccepted, { 'attr': { 'class': 'input-mini' } }) }}
+		    					{{ form_errors(filter_form.isAccepted) }}
+							</div>
+						</div>
+					</div>
+
+					<div class="row">
+						<div class="control-group span4 {% if filter_form.userEmail.vars.errors|length %}error{% endif %}">
+							{{ form_label(filter_form.userEmail, 'User email', { 'label_attr': {'class': 'control-label'} }) }}
+							<div class="controls">
+							    {{ form_widget(filter_form.userEmail) }}
+		    					{{ form_errors(filter_form.userEmail) }}
+							</div>
+						</div>
+					</div>
+					
+					<div class="clearfix"></div>
+
+					<div class="form-actions text-right">
+						{{ form_widget(filter_form) }}
+						<a href="{{ path('hasheado_blog_admin_comment_filter', { 'field': orderBy, 'mode': sort_mode }) }}?_reset" class="btn">Reset</a>
+						<button type="submit" class="btn btn-primary">Filter</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>
