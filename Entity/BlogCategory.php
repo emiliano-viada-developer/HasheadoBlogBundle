@@ -10,6 +10,7 @@ use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 /**
  * @ORM\Entity
  * @ORM\Table(name="blog_category")
+ * @ORM\Entity(repositoryClass="Hasheado\BlogBundle\Entity\Repository\BlogCategoryRepository")
  * @UniqueEntity("slug")
  */
 class BlogCategory

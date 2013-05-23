@@ -5,6 +5,7 @@ namespace Hasheado\BlogBundle\Controller\Admin;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
 use Hasheado\BlogBundle\Form\BlogCommentType as CommentType;
+use Hasheado\BlogBundle\Form\Filter\BlogCommentFilter;
 use Hasheado\BlogBundle\Util\Paginator;
 
 class BlogCommentController extends Controller
@@ -14,29 +15,30 @@ class BlogCommentController extends Controller
      */
     public function listAction($page = 1)
     {
-        $em = $this->getDoctrine()->getManager();
-        $entities = $em->getRepository('HasheadoBlogBundle:BlogComment')->findAll();
-
         //Sorting
         list($orderBy, $sortMode, $sortModeReverse) = $this->sorting();
+        //Filtering
+        list($filterForm, $filtered) = $this->filtering();
+
+        $em = $this->getDoctrine()->getManager();
+        $query = $em->getRepository('HasheadoBlogBundle:BlogComment')->getListQuery($filtered, array($orderBy => $sortMode));
 
         $paginator = Paginator::getInfo(
-            count($entities),                                        //Total of records
+            $query,                                                  //Doctrine query
             $this->container->getParameter('admin_items_per_list'),  //Items per list
             $page,                                                   //Page number
             'hasheado_blog_admin_comment_pagination'                 //Route to paginate
         );
 
-        $comments = $em->getRepository('HasheadoBlogBundle:BlogComment')->findBy(
-            array(), //Criteria (Filtering)
-            array($orderBy => $sortMode), //OrderBy (Sortering)
-            $paginator['per_page'],
-            $paginator['offset']
-        );
+        $comments = $paginator['doctrine_paginator']->getQuery()
+                    ->setFirstResult($paginator['offset'])
+                    ->setMaxResults($paginator['per_page'])
+                    ->getResult();
 
         return $this->render('HasheadoBlogBundle:Admin\BlogComment:list.html.twig', array(
             'comments' => $comments,
             'paginator' => $paginator,
+            'filter_form' => $filterForm->createView(),
             'orderBy' => $orderBy,
             'sort_mode_reverse' => $sortModeReverse,
         ));
@@ -48,12 +50,72 @@ class BlogCommentController extends Controller
     public function filterAction($field, $mode)
     {
         $session = $this->get('session');
+        $request = $this->getRequest();
+        $em = $this->getDoctrine()->getManager();
 
-        $sort = array(
-            'comment' => array(
+        //Check Reset
+        if (stristr($request->getQueryString(), '_reset')) {
+            //Reset filters
+            if ($session->has('filter')) {
+                $filter = json_decode($session->get('filter'), true);
+                if (isset($filter['comment']))
+                    unset($filter['comment']);
+
+                $session->set('filter', json_encode($filter));
+            }
+            //Reset sorting
+            if ($session->has('sort')) {
+                $sort = json_decode($session->get('sort'), true);
+                if (isset($sort['comment']))
+                    unset($sort['comment']);
+
+                $session->set('sort', json_encode($sort));
+            }
+
+            return $this->redirect($this->generateUrl('hasheado_blog_admin_comment_list'));
+        }
+
+        if ($request->isMethod('POST')) {
+            $filterForm = $this->createForm(new BlogCommentFilter(array(), $em));
+            $filterForm->bind($request);
+
+            $filtered = array();
+            if ($filterForm->isValid()) {
+                
+                $data = $filterForm->getData();
+                if (count($data)) {
+                    foreach ($data as $key => $value) {
+                        if (!is_null($value) && $value != '') {
+                            $filtered[$key] = $value;
+                        } elseif (is_integer($value) && $value == 0) {
+                            $filtered[$key] = $value;
+                        } elseif (isset($filtered[$key])) {
+                            unset($filtered[$key]);
+                        }
+                    }
+                }
+            }
+
+            if ($session->has('filter')) {
+                $filter = json_decode($session->get('filter'), true);
+                if (isset($filter['comment']))
+                    unset($filter['comment']);
+                
+                if (count($filtered))
+                    $filter['comment'] = $filtered;
+                
+                $session->set('filter', json_encode($filter));
+            } elseif (count($filtered)) {
+                $session->set('filter', json_encode(array('comment' => $filtered)));
+            }
+        }
+
+        if ($session->has('sort'))
+            $sort = json_decode($session->get('sort'), true);
+
+        $sort['comment'] = array(
                 'field' => $field,
                 'mode' => $mode
-            )
         );
 
         $session->set('sort', json_encode($sort));
@@ -171,5 +233,25 @@ class BlogCommentController extends Controller
         }
 
         return array($orderBy, $sortMode, $sortModeReverse);
+    }
+
+    /**
+     * filtering method
+     */
+    protected function filtering()
+    {
+        $em = $this->getDoctrine()->getManager();
+        $session = $this->get('session');
+        $filtered = array();
+
+        if ($session->has('filter')) {
+            $filter = json_decode($session->get('filter'), true);
+            if(isset($filter['comment']))
+                $filtered = $filter['comment'];
+        }
+
+        $filterForm = $this->createForm(new BlogCommentFilter($filtered, $em));
+
+        return array($filterForm, $filtered);
     }
 }

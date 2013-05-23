@@ -6,6 +6,15 @@
 .text-center {
 	text-align: center !important;
 }
+.text-right {
+	text-align: right !important;
+}
+.text-left {
+	text-align: left !important;
+}
+.inline {
+	display: inline-block !important;
+}
 .pagination span {
 	padding-right: 20px;
 	position: relative;

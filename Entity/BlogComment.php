@@ -8,6 +8,7 @@ use Symfony\Component\Validator\Constraints as Assert;
 /**
  * @ORM\Entity
  * @ORM\Table(name="blog_comment")
+ * @ORM\Entity(repositoryClass="Hasheado\BlogBundle\Entity\Repository\BlogCommentRepository")
  */
 class BlogComment
 {

@@ -2,22 +2,27 @@
 
 namespace Hasheado\BlogBundle\Util;
 
+use Doctrine\ORM\Tools\Pagination\Paginator as DoctrinePaginator;
+
 /*
  * Paginator class
  * @desc Add Pagination logic
  */
 class Paginator
 {
-	/*
-	 * getInfo() static function
-	 * @desc Get an array with pagination info
-	 * @params int $total, int $perPage, int $page, string $route
-	 * @return array $paginator
-	 */
-	static public function getInfo($total, $perPage, $page, $route)
-	{
-		$paginator['total'] = $total;
-		$paginator['route'] = $route;
+    /*
+     * getInfo() static function
+     * @desc Get an array with pagination info
+     * @params Doctrine_Query $query, int $perPage, int $page, string $route
+     * @return array $paginator
+     */
+    static public function getInfo($query, $perPage, $page, $route)
+    {
+        $doctrinePaginator = new DoctrinePaginator($query);
+
+        $paginator['doctrine_paginator'] = $doctrinePaginator;
+        $paginator['total'] = count($doctrinePaginator);
+        $paginator['route'] = $route;
         $paginator['per_page'] = $perPage;
         $paginator['page'] = $page;
         $paginator['left'] = $page - 1;
@@ -31,9 +36,9 @@ class Paginator
             $paginator['pages_to_show']['end'] = ($page >= 3)? $page + 2 : 5;
 
             if($paginator['pages_to_show']['end'] > $paginator['num_pages']) {
-            	$paginator['pages_to_show']['end'] = $paginator['num_pages'];
-            	$diff = $paginator['page'] - $paginator['num_pages'] + 2;
-            	$paginator['pages_to_show']['init'] = $paginator['pages_to_show']['init'] - $diff;
+                $paginator['pages_to_show']['end'] = $paginator['num_pages'];
+                $diff = $paginator['page'] - $paginator['num_pages'] + 2;
+                $paginator['pages_to_show']['init'] = $paginator['pages_to_show']['init'] - $diff;
             }
 
         } else {
@@ -42,5 +47,5 @@ class Paginator
         }
 
         return $paginator;
-	}
+    }
 }
