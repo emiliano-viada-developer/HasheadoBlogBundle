@@ -27,11 +27,20 @@ class EntityIdType extends AbstractType
 {
     protected $registry;
 
+    /**
+     * Constructor
+     * @param RegistryInterface $registry
+     */
     public function __construct(RegistryInterface $registry)
     {
         $this->registry = $registry;
     }
 
+    /**
+     * buildForm() function
+     * @param  FormBuilderInterface $builder
+     * @param  array $options
+     */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         if ('2' == Kernel::MAJOR_VERSION && '2' < Kernel::MINOR_VERSION) {
@@ -49,6 +58,10 @@ class EntityIdType extends AbstractType
         ));
     }
 
+    /**
+     * setDefaultOptions() function
+     * @param OptionsResolverInterface $resolver
+     */
     public function setDefaultOptions(OptionsResolverInterface $resolver)
     {
         $resolver->setRequired(array(
@@ -64,6 +77,12 @@ class EntityIdType extends AbstractType
         ));
     }
 
+    /**
+     * buildView() function
+     * @param  FormView $view
+     * @param  FormInterface $form
+     * @param  array $options
+     */
     public function buildView(FormView $view, FormInterface $form, array $options)
     {
         if (true === $options['hidden']) {
@@ -71,11 +90,19 @@ class EntityIdType extends AbstractType
         }
     }
 
+    /**
+     * getParent() function
+     * @return string $parentName
+     */
     public function getParent()
     {
         return 'text';
     }
 
+    /**
+     * getName() function
+     * @return string $name
+     */
     public function getName()
     {
         return 'entity_id';

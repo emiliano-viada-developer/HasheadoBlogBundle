@@ -8,3 +8,7 @@ services:
         arguments: [@doctrine]
         tags:
             - { name: form.type, alias: entity_id }
+    hasheado_blog.wysiwyg.type:
+        class: Hasheado\BlogBundle\Form\Type\WysiwygType
+        tags:
+            - { name: form.type, alias: wysiwyg }

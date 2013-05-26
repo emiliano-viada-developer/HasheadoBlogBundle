@@ -16,7 +16,10 @@ class BlogPostType extends AbstractType
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
         $builder->add('title');
-        $builder->add('content');
+        $builder->add('content', 'wysiwyg', array(
+            'required' => true,
+            'attr' => array('rows' => 25),
+        ));
         $builder->add('category', null, array(
             'empty_value' => 'Choose an option',
         ));

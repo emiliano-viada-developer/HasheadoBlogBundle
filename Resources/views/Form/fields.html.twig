@@ -1,0 +1,10 @@
+{% block wysiwyg_widget %}
+    {% spaceless %}
+        {{ block('textarea_widget') }}
+        <script type="text/javascript">
+            $(document).ready(function() {
+                tinymce.init({{ form.vars._settings|raw }});
+            });
+        </script>
+    {% endspaceless %}
+{% endblock wysiwyg_widget %}

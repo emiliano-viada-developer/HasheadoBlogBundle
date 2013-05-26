@@ -7,3 +7,6 @@ parameters:
 twig:
   globals:
     blog_title: %blog_title%
+  form:
+    resources:
+      - 'HasheadoBlogBundle:Form:fields.html.twig'
