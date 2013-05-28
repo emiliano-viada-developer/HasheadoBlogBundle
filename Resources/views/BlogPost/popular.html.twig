@@ -1,0 +1,12 @@
+<ul class="unstyled">
+	{% if posts|length > 0 %}
+		{% for post in posts %}
+			<li> 
+				<i class="icon-flag"></i>
+				<a href="{{ path('hasheado_blog_post_detail', { slug: post[0].slug }) }}">{{ post[0] }}</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<li>No posts.</li>
+	{% endif %}
+</ul>

@@ -2,6 +2,9 @@
 parameters:
   blog_title: 'Hasheado Blog'
   admin_items_per_list: 10
+  post_in_homepage: 3
+  popular_post_sidebar: 5
+  comments_sidebar: 5
 
 #Config for twig templates
 twig:

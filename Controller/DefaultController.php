@@ -5,17 +5,34 @@ namespace Hasheado\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
 use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
+use Hasheado\BlogBundle\Util\Paginator;
 
 class DefaultController extends Controller
 {
     /** Homepage */
-    public function indexAction()
+    public function indexAction($page = 1)
     {
         $em = $this->getDoctrine()->getManager();
-        $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->getLatest();
+        $query = $em->getRepository('HasheadoBlogBundle:BlogPost')->getListQuery(
+            array('isPublished' => 1),
+            array('publishedAt' => 'DESC')
+        );
+
+        $paginator = Paginator::getInfo(
+            $query,                                                  //Doctrine query
+            $this->container->getParameter('post_in_homepage'),      //Items per list
+            $page,                                                   //Page number
+            'hasheado_blog_homepage_pagination'                      //Route to paginate
+        );
+
+        $posts = $paginator['doctrine_paginator']->getQuery()
+                    ->setFirstResult($paginator['offset'])
+                    ->setMaxResults($paginator['per_page'])
+                    ->getResult();
 
         return $this->render('HasheadoBlogBundle:Default:index.html.twig', array(
         	'posts' => $posts,
+            'paginator' => $paginator,
     	));
     }
 

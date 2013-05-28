@@ -67,4 +67,35 @@ class BlogCategoryRepository extends EntityRepository
 
 		return $qb->getQuery();
 	}
+
+	/**
+	 * getWithPosts method
+	 * Returns categories with posts
+	 * @return ArrayCollection $categories
+	 */
+	public function getWithPosts()
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+		$categories = array();
+		
+	    $qb->select('p', 'c', 'COUNT(p) AS posts')
+	        ->from('HasheadoBlogBundle:BlogPost', 'p')
+	        ->leftJoin('p.category', 'c')
+	        ->andWhere('p.isPublished = 1')
+	        ->addGroupBy('p.category')
+	        ->orderBy('posts', 'DESC');
+
+	    $result = $qb->getQuery()->getResult();
+
+	    if (count($result)) {
+	    	foreach ($result as $k => $record) {
+	    		$category = (is_null($record[0]->getCategory()))? 'Uncategorized' : $record[0]->getCategory();
+	    		$categories[$k]['category'] = $category;
+	    		$categories[$k]['posts'] = $record['posts'];
+	    	}
+	    }
+
+	    return $categories;
+	}
 }

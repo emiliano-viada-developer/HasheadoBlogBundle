@@ -1,0 +1,13 @@
+<ul class="unstyled">
+	{% if categories|length > 0 %}
+		{% for category in categories %}
+			<li> 
+				<i class="icon-star"></i>
+				{% set slug = (category.category == 'Uncategorized')? 'uncategorized' : category.category.slug %}
+				<a href="{{ path('hasheado_blog_post_by_category', { slug: slug }) }}">{{ category.category }} ({{ category.posts }})</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<li>No categories.</li>
+	{% endif %}
+</ul>

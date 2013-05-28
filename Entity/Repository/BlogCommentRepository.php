@@ -70,4 +70,26 @@ class BlogCommentRepository extends EntityRepository
 
 		return $qb->getQuery();
 	}
+
+	/**
+	 * getLatest method
+	 * Returns latest comments
+	 * @return ArrayCollection $comments
+	 */
+	public function getLatest($records = 5)
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+		$comments = array();
+		
+	    $qb->select('c')
+	        ->from('HasheadoBlogBundle:BlogComment', 'c')
+	        ->andWhere('c.isAccepted = 1')
+	        ->addOrderBy('c.createdAt', 'DESC');
+
+	    $comments = $qb->getQuery()
+	    			->setMaxResults($records)->getResult();
+
+	    return $comments;
+	}
 }

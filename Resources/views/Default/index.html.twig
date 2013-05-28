@@ -1,9 +1,8 @@
 {% extends 'HasheadoBlogBundle::layout.html.twig' %}
 
 {% block content %}
-	<h1>My Blog Homepage</h1>
-
-	<section>
+	
+	<section class="homepage">
 	
 		{% if posts|length > 0 %}
 			
@@ -21,6 +20,19 @@
 					<p>{{ post.content|raw }}</p>
 				</article>
 			{% endfor %}
+
+			{% if paginator.have_to_paginate %}
+				<ul class="pager">
+					<li class="previous {% if paginator.page == 1 %}disabled{% endif %}">
+						{% set newer_link = (paginator.page == 1)? 'javascript:void(0)' : path(paginator.route, { page: paginator.left }) %}
+						<a href="{{ newer_link }}">&larr; Newer</a>
+					</li>
+					<li class="next {% if paginator.page == paginator.num_pages %}disabled{% endif %}">
+						{% set older_link = (paginator.page == paginator.num_pages)? 'javascript:void(0)' : path(paginator.route, { page: paginator.right }) %}
+						<a href="{{ older_link }}">Older &rarr;</a>
+					</li>
+				</ul>
+			{% endif %}
 
 		{% else %}
 			<p>No posts found.</p>

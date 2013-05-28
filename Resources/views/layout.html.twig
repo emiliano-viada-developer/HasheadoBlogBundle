@@ -2,11 +2,40 @@
 
 {% block title %}Blog{% endblock %}
 
-{% block stylesheets %}{% endblock stylesheets %}
+{% block stylesheets %}
+	{% stylesheets 
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.css'
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-classic.css'
+		'bundles/hasheadoblog/css/main.css' filter='cssrewrite' %}
+		<link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+	{% endstylesheets %}
+{% endblock stylesheets %}
 
 {% block body %}
 	
-	{% block content %}{% endblock %}
+	<!-- Header nav -->
+	{% include 'HasheadoBlogBundle::_header_nav.html.twig' %}
+
+	<div class="container" id="container">
+
+		<div class="row fluide">
+
+			<!-- Main content -->
+			<div class="span8 clearfix">
+				{% block content %}{% endblock %}
+			</div>
+
+			<!-- Sidebar -->
+			<aside class="span4 rightbar">
+				{% include 'HasheadoBlogBundle::_sidebar.html.twig' %}
+			</aside>
+			
+		</div>
+
+	</div> <!-- END main container -->
+
+	<!-- Footer -->
+	{% include 'HasheadoBlogBundle::_footer.html.twig' %}	
 
 {% endblock %}
 

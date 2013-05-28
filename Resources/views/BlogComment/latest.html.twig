@@ -1,0 +1,12 @@
+<ul class="unstyled">
+	{% if comments|length > 0 %}
+		{% for comment in comments %}
+			<li> 
+				<i class="icon-comment"></i>
+				<a href="{{ path('hasheado_blog_post_detail', { slug: comment.post.slug }) }}#comments">{{ comment }}</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<li>No comments.</li>
+	{% endif %}
+</ul>

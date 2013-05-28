@@ -1,0 +1,69 @@
+<div class="sidebar clearfix">
+		
+	<!-- Search -->
+	<div>
+		<h3 class="title">Search</h2>
+		<div>
+			<form class="form-search">
+				<div class="input-append">
+					<input type="text" class="search-query" name="q" />
+					<button type="submit" class="btn">Search</button>
+				</div>
+			</form>
+		</div>
+	</div>
+
+	<!-- Categories -->
+	<div>
+		<h3 class="title">Categories</h3>
+		<div>
+			{% render(controller('HasheadoBlogBundle:BlogCategory:withPosts')) %}
+		</div>
+	</div>
+
+	<!-- Archive -->
+	<div>
+		<h3 class="title">Archive</h3>
+		<div>
+			{% render(controller('HasheadoBlogBundle:BlogPost:archive')) %}
+		</div>
+	</div>
+
+	<!-- Popular Posts -->
+	<div>
+		<h3 class="title">Popular Posts</h3>
+		<div>
+			{% render(controller('HasheadoBlogBundle:BlogPost:popular')) %}
+		</div>
+	</div>
+
+	<!-- Latest Comments -->
+	<div>
+		<h3 class="title">Latest Comments</h3>
+		<div>
+			{% render(controller('HasheadoBlogBundle:BlogComment:latest')) %}
+		</div>
+	</div>
+
+	<!-- Popular Tags -->
+	<div>
+		<h3 class="title">Popular Tags</h3>
+		<div>
+			<ul class="unstyled">
+				<li>
+					<i class="icon-tag"></i>
+					<a href="#">Symfony (4)</a>
+				</li>
+				<li>
+					<i class="icon-tag"></i>
+					<a href="#">PHP (3)</a>
+				</li>
+				<li>
+					<i class="icon-tag"></i>
+					<a href="#">Doctrine (1)</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+
+</div>

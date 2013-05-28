@@ -1,6 +1,10 @@
 hasheado_blog_homepage:
     pattern:  /
-    defaults: { _controller: HasheadoBlogBundle:Default:index }
+    defaults: { _controller: HasheadoBlogBundle:Default:index, page: 1 }
+
+hasheado_blog_homepage_pagination:
+    pattern:  /{page}
+    defaults: { _controller: HasheadoBlogBundle:Default:index, page: 1 }
 
 hasheado_blog_post_detail:
     pattern:  /{slug}

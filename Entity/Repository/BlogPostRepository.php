@@ -89,4 +89,57 @@ class BlogPostRepository extends EntityRepository
 
 		return $posts;
 	}
+
+	/**
+	 * getArchive method
+	 * Returns posts grouped by months
+	 * @return ArrayCollection $months
+	 */
+	public function getArchive()
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+		$months = array();
+		
+	    $qb->select('p')
+	        ->from('HasheadoBlogBundle:BlogPost', 'p')
+	        ->andWhere('p.isPublished = 1')
+	        ->orderBy('p.publishedAt', 'DESC');
+
+	    $result = $qb->getQuery()->getResult();
+
+	    if (count($result)) {
+	    	foreach ($result as $k => $record) {
+	    		$mKey = date('Y M', strtotime($record->getPublishedAt()->format('Y-m-d')));
+	    		$months[$mKey] = (isset($months[$mKey]))? $months[$mKey]+1 : 1;
+	    	}
+	    }
+
+	    return $months;
+	}
+
+	/**
+	 * getPopular method
+	 * Returns popular posts based on comments
+	 * @return ArrayCollection $posts
+	 */
+	public function getPopular($records = 5)
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+		$months = array();
+		
+	    $qb->select('p', 'COUNT(c.id) AS comments')
+	        ->from('HasheadoBlogBundle:BlogPost', 'p')
+	        ->leftJoin('p.comments', 'c')
+	        ->andWhere('p.isPublished = 1')
+	        ->groupBy('p.id')
+	        ->addOrderBy('comments', 'DESC')
+	        ->addOrderBy('p.publishedAt', 'DESC');
+
+	    $posts = $qb->getQuery()
+	    			->setMaxResults($records)->getResult();
+
+	    return $posts;
+	}
 }
