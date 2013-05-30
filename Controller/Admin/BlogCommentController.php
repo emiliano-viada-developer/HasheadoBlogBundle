@@ -41,6 +41,7 @@ class BlogCommentController extends Controller
             'filter_form' => $filterForm->createView(),
             'orderBy' => $orderBy,
             'sort_mode_reverse' => $sortModeReverse,
+            'filtered' => (count($filtered))? true : false,
         ));
     }
 

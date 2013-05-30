@@ -18,7 +18,7 @@
 		<input class="btn btn-primary" type="submit" name="submit_button" value="{{ btn_label }}" />
 		<a class="btn" href="{{ path('hasheado_blog_admin_category_list') }}">Cancel</a>
 		{% if (edit_mode) %}
-			<a class="btn btn-danger" href="{{ path('hasheado_blog_admin_category_delete', { 'id': category_id }) }}">Delete</a>
+			<a class="btn btn-danger confirm-delete" href="{{ path('hasheado_blog_admin_category_delete', { 'id': category_id }) }}">Delete</a>
 		{% endif %}
 	</div>
 </form>

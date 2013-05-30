@@ -55,6 +55,9 @@ aside.rightbar {
 footer {
 	background-color: #eeeeee;
 }
+footer.fadmin {
+	background-color: inherit;
+}
 footer .container .row div {
 	padding: 20px 0;
 }
@@ -117,9 +120,13 @@ input[type="text"] {
 	-moz-border-radius: 0 !important;
 	border-radius: 0 !important;
 }
+.box-header {
+	cursor: inherit;
+}
 .brand {
 	font-family: inherit !important;
 	width: 260px;
+	letter-spacing: 1px;
 }
 .input-prepend .add-on {
 	margin-right: -5px;

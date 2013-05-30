@@ -32,7 +32,7 @@
 			</noscript>
 
 			<!-- content starts -->
-			<div id="content" class="span10">
+			<div id="content" class="span10" data-controller="{{ app.request.attributes.get('_controller') }}">
 
 				{% render(controller('HasheadoBlogBundle:Admin/Default:breadcrumb', { current_route: app.request.attributes.get('_route') })) %}
 
@@ -47,15 +47,21 @@
 
 	<hr/>
 
-	<footer>
+	<footer class="fadmin">
 		<p class="text-center">&copy; {{ "now"|date("Y") }} - {{ blog_title }}</p>
 	</footer>
+
+	<!-- Modal Delete Confirmation -->
+	{% include 'HasheadoBlogBundle:Admin/Default:_modal_delete_confirmation.html.twig' %}
 
 {% endblock %}
 
 {% block javascripts %}
-	{% javascripts 'bundles/hasheadoblog/bootstrap/js/bootstrap.min.js' %}
+	{% javascripts 'bundles/hasheadoblog/bootstrap/js/bootstrap.min.js'
+				   'bundles/hasheadoblog/bootstrap/js/bootstrap-modal.js'
+				   'bundles/hasheadoblog/js/hasheado-blog-admin.js' %}
 		<script type="text/javascript" src="{{ asset_url }}"></script>
+
 	{% endjavascripts %}
 	<script type="text/javascript" src="/bundles/hasheadoblog/tinymce/js/tinymce/tinymce.min.js"></script>
 {% endblock javascripts %}
