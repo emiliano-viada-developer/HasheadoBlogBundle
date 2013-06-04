@@ -1,5 +1,5 @@
 {% set edit_mode = (form.vars.value.id != null)? true : false %}
-{% set action_route = (edit_mode)? path('hasheado_blog_admin_comment_edit', { 'id': comment_id }) : path('hasheado_blog_admin_comment_add') %}
+{% set action_route = (edit_mode)? path('hasheado_blog_admin_comment_edit', { 'id': entity_id }) : path('hasheado_blog_admin_comment_add') %}
 <form action="{{ action_route }}" method="POST" class="form-horizontal">
 	{{ form_errors(form) }}
 
@@ -58,7 +58,7 @@
 		<input class="btn btn-primary" type="submit" name="submit_button" value="{{ btn_label }}" />
 		<a class="btn" href="{{ path('hasheado_blog_admin_comment_list') }}">Cancel</a>
 		{% if (edit_mode) %}
-			<a class="btn btn-danger confirm-delete" href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment_id }) }}">Delete</a>
+			<a class="btn btn-danger confirm-delete" href="{{ path('hasheado_blog_admin_comment_delete', { 'id': entity_id }) }}">Delete</a>
 		{% endif %}
 	</div>
 </form>
