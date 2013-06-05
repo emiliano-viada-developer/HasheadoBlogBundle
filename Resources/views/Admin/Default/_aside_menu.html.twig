@@ -8,7 +8,7 @@
 			
 			{% set dashboard_active = (current_route == 'hasheado_blog_admin_dashboard')? 'class=active' : null %}
 			<li {{ dashboard_active }}>
-				<a class="ajax-link" href="{{ path('hasheado_blog_admin_dashboard') }}">
+				<a href="{{ path('hasheado_blog_admin_dashboard') }}">
 					<i class="icon-home"></i><span class="hidden-tablet"> Dashboard</span>
 				</a>
 			</li>
@@ -16,7 +16,7 @@
 			{% set categories_routes = ['hasheado_blog_admin_category_list', 'hasheado_blog_admin_category_pagination', 'hasheado_blog_admin_category_add', 'hasheado_blog_admin_category_edit'] %}
 			{% set categories_active = (current_route in categories_routes)? 'class=active' : null %}
 			<li {{ categories_active }}>
-				<a class="ajax-link" href="{{ path('hasheado_blog_admin_category_list') }}">
+				<a href="{{ path('hasheado_blog_admin_category_list') }}">
 					<i class="icon-list"></i><span class="hidden-tablet"> Categories</span>
 				</a>
 			</li>
@@ -24,7 +24,7 @@
 			{% set posts_routes = ['hasheado_blog_admin_post_list', 'hasheado_blog_admin_post_pagination', 'hasheado_blog_admin_post_add', 'hasheado_blog_admin_post_edit'] %}
 			{% set posts_active = (current_route in posts_routes)? 'class=active' : null %}
 			<li {{ posts_active }}>
-				<a class="ajax-link" href="{{ path('hasheado_blog_admin_post_list') }}">
+				<a href="{{ path('hasheado_blog_admin_post_list') }}">
 					<i class="icon-edit"></i><span class="hidden-tablet"> Posts</span>
 				</a>
 			</li>
@@ -32,8 +32,16 @@
 			{% set comments_routes = ['hasheado_blog_admin_comment_list', 'hasheado_blog_admin_comment_pagination', 'hasheado_blog_admin_comment_add', 'hasheado_blog_admin_comment_edit'] %}
 			{% set comments_active = (current_route in comments_routes)? 'class=active' : null %}
 			<li {{ comments_active }}>
-				<a class="ajax-link" href="{{ path('hasheado_blog_admin_comment_list') }}">
+				<a href="{{ path('hasheado_blog_admin_comment_list') }}">
 					<i class="icon-comment"></i><span class="hidden-tablet"> Comments</span>
+				</a>
+			</li>
+
+			{% set tags_routes = ['hasheado_blog_admin_tag_list', 'hasheado_blog_admin_tag_pagination', 'hasheado_blog_admin_tag_add', 'hasheado_blog_admin_tag_edit'] %}
+			{% set tags_active = (current_route in tags_routes)? 'class=active' : null %}
+			<li {{ tags_active }}>
+				<a href="{{ path('hasheado_blog_admin_tag_list') }}">
+					<i class="icon-tag"></i><span class="hidden-tablet"> Tags</span>
 				</a>
 			</li>
 		</ul>

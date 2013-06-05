@@ -1,0 +1,31 @@
+<div class="row-fluid">
+	<div class="box span12">
+		<div class="box-header well" data-original-title="">
+			<h2><i class="icon-search"></i> Filters</h2>
+			<div class="box-icon">
+				<a href="javascript:void(0)" class="btn btn-minimize btn-round"><i class="icon-chevron-down"></i></a>
+			</div>
+		</div>
+		<div class="box-content {% if not filtered %}hide{% endif %}">
+			<form action="{{  path('hasheado_blog_admin_tag_filter', { 'field': orderBy, 'mode': sort_mode }) }}" method="post" class="form-horizontal">
+				<fieldset>
+					<div class="control-group span4 {% if filter_form.name.vars.errors|length %}error{% endif %}">
+						{{ form_label(filter_form.name, 'Name', { 'label_attr': {'class': 'control-label'} }) }}
+						<div class="controls">
+						    {{ form_widget(filter_form.name) }}
+	    					{{ form_errors(filter_form.name) }}
+						</div>
+					</div>
+
+					<div class="clearfix"></div>
+
+					<div class="form-actions text-right">
+						{{ form_widget(filter_form) }}
+						<a href="{{ path('hasheado_blog_admin_tag_filter', { 'field': orderBy, 'mode': sort_mode }) }}?_reset" class="btn">Reset</a>
+						<button type="submit" class="btn btn-primary">Filter</button>
+					</div>
+				</fieldset>
+			</form>
+		</div>
+	</div>
+</div>

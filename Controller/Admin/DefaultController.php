@@ -30,6 +30,8 @@ class DefaultController extends Controller
                                 'hasheado_blog_admin_post_add', 'hasheado_blog_admin_post_edit');
         $commentsRoutes = array('hasheado_blog_admin_comment_list', 'hasheado_blog_admin_comment_pagination',
                                 'hasheado_blog_admin_comment_add', 'hasheado_blog_admin_comment_edit');
+        $tagsRoutes = array('hasheado_blog_admin_tag_list', 'hasheado_blog_admin_tag_pagination',
+                                'hasheado_blog_admin_tag_add', 'hasheado_blog_admin_tag_edit');
 
         $breadcrumb = array(
             0 => array(
@@ -49,6 +51,9 @@ class DefaultController extends Controller
         } elseif (in_array($current_route, $commentsRoutes)) {
             $breadcrumb[1]['route'] = 'hasheado_blog_admin_comment_list';
             $breadcrumb[1]['label'] = 'Comments';
+        } elseif (in_array($current_route, $tagsRoutes)) {
+            $breadcrumb[1]['route'] = 'hasheado_blog_admin_tag_list';
+            $breadcrumb[1]['label'] = 'Tags';
         }
 
         if (stristr($current_route, 'add')) {

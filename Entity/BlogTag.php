@@ -3,17 +3,17 @@
 namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-use Doctrine\Common\Collections\ArrayCollection;
+//use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
 /**
  * @ORM\Entity
- * @ORM\Table(name="blog_category")
- * @ORM\Entity(repositoryClass="Hasheado\BlogBundle\Entity\Repository\BlogCategoryRepository")
+ * @ORM\Table(name="blog_tag")
+ * @ORM\Entity(repositoryClass="Hasheado\BlogBundle\Entity\Repository\BlogTagRepository")
  * @UniqueEntity("slug")
  */
-class BlogCategory
+class BlogTag
 {
 	/**
      * @ORM\Id
@@ -31,7 +31,7 @@ class BlogCategory
     /**
      * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="category")
      */
-    protected $posts;
+    //protected $posts;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
@@ -49,10 +49,10 @@ class BlogCategory
     protected $updatedAt;
 
     /** Contructor **/
-    public function __contruct()
+    /*public function __contruct()
     {
         $this->posts = new ArrayCollection();
-    }
+    }*/
 
     /** magic methods **/
     public function __toString()
@@ -72,10 +72,10 @@ class BlogCategory
     	$this->name = $name;
     }
 
-    public function setPosts(ArrayCollection $posts)
+    /*public function setPosts(ArrayCollection $posts)
     {
         $this->posts = $posts;
-    }
+    }*/
 
     public function setSlug($slug)
     {
@@ -104,10 +104,10 @@ class BlogCategory
         return $this->name;
     }
 
-    public function getPosts()
+    /*public function getPosts()
     {
         return $this->posts;
-    }
+    }*/
 
     public function getSlug()
     {

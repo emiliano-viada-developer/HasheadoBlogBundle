@@ -107,4 +107,29 @@ hasheado_blog_admin_comment_edit:
 hasheado_blog_admin_comment_delete:
     pattern: /admin/comment/{id}/delete
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogComment:delete }
+
+#Tag
+hasheado_blog_admin_tag_list:
+    pattern: /admin/tags
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogTag:list }
+
+hasheado_blog_admin_tag_pagination:
+    pattern:  /admin/tags/page/{page}
+    defaults: { _controller: "HasheadoBlogBundle:Admin\BlogTag:list", page: 1 }
+
+hasheado_blog_admin_tag_filter:
+    pattern:  /admin/tags/filter/{field}/{mode}
+    defaults: { _controller: "HasheadoBlogBundle:Admin\BlogTag:filter" }
+
+hasheado_blog_admin_tag_add:
+    pattern: /admin/tag/add
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogTag:add }
+
+hasheado_blog_admin_tag_edit:
+    pattern: /admin/tag/{id}
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogTag:edit }
+
+hasheado_blog_admin_tag_delete:
+    pattern: /admin/tag/{id}/delete
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogTag:delete }
 #End Admin routes

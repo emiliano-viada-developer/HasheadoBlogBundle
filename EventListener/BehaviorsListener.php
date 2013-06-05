@@ -62,6 +62,10 @@ class BehaviorsListener
 					$sluggable_field = $entity->getName();
 					$repository = $em->getRepository('HasheadoBlogBundle:BlogCategory');
 					break;
+				case 'Hasheado\BlogBundle\Entity\BlogTag':
+					$sluggable_field = $entity->getName();
+					$repository = $em->getRepository('HasheadoBlogBundle:BlogTag');
+					break;
 				default:
 					break;
 			}
