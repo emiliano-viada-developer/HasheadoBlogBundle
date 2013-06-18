@@ -149,14 +149,15 @@ class AdminController extends Controller
     {
         $request = $this->getRequest();
         $session = $this->get('session');
+        $em = $this->getDoctrine()->getManager();
         $entity = new $this->entityClass();
-        $form = $this->createForm(new $this->entityForm(), $entity);
+        $formOptions = $this->getFormOptions($request, $em);
+        $form = $this->createForm(new $this->entityForm(), $entity, $formOptions);
 
         if ($request->isMethod('POST')) {
             $form->bind($request);
 
             if ($form->isValid()) {
-                $em = $this->getDoctrine()->getManager();
                 $em->persist($entity);
                 $em->flush();
 
@@ -189,12 +190,13 @@ class AdminController extends Controller
                 'No ' . $this->entityName . ' found for id '.$id
             );
         }
-
-        $form = $this->createForm(new $this->entityForm(), $entity);
+        
+        $formOptions = $this->getFormOptions($request, $em);
+        $form = $this->createForm(new $this->entityForm(), $entity, $formOptions);
 
         if ($request->isMethod('POST')) {
             $form->bind($request);
-
+            
             if ($form->isValid()) {
                 $em->persist($entity);
                 $em->flush();
@@ -212,6 +214,38 @@ class AdminController extends Controller
             'form' => $form->createView(),
             'entity_id' => $id
         ));
+    }
+
+    /**
+     * getFormOptions() method
+     * Returns an array with options for Form
+     * @param $request, $em
+     */
+    protected function getFormOptions($request, $em)
+    {
+        $options = array();
+
+        //Check if the form needs the entityManager
+        if ($this->use_em)
+            $options['em'] = $em;
+
+        //Add extra choices to a choice field type in the form
+        if ($this->entityName == 'post' && $request->isMethod('POST')) {
+            $post = $request->request->get('post');
+            $tags = $post['tags'];
+            $extra = array();
+            if (count($tags)) {
+                foreach ($tags as $i => $val) {
+                    if (is_numeric($val))
+                        unset($tags[$i]);
+                    else
+                        $extra[$val] = $val;
+                }
+            }
+            $options['extra_choices'] = $extra;
+        }
+
+        return $options;
     }
 
     /**

@@ -27,6 +27,14 @@
 	    </div>
 	</div>
 
+	<div class="control-group {% if form.tags.vars.errors|length %}error{% endif %}">
+	    {{ form_label(form.tags, 'Tags', { 'label_attr': {'class': 'control-label'} }) }}
+	    <div class="controls">
+	    	{{ form_widget(form.tags) }}
+	    	{{ form_errors(form.tags) }}
+	    </div>
+	</div>
+
 	<div class="control-group {% if form.isPublished.vars.errors|length %}error{% endif %}">
 	    {{ form_label(form.isPublished, 'Published?', { 'label_attr': {'class': 'control-label'} }) }}
 	    <div class="controls">

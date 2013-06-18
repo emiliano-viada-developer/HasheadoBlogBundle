@@ -3,7 +3,7 @@
 namespace Hasheado\BlogBundle\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
-//use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\ArrayCollection;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 
@@ -29,9 +29,9 @@ class BlogTag
     protected $name;
 
     /**
-     * @ORM\OneToMany(targetEntity="BlogPost", mappedBy="category")
+     * @ORM\ManyToMany(targetEntity="BlogPost", mappedBy="tags")
      */
-    //protected $posts;
+    protected $posts;
 
     /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
@@ -49,10 +49,10 @@ class BlogTag
     protected $updatedAt;
 
     /** Contructor **/
-    /*public function __contruct()
+    public function __contruct()
     {
         $this->posts = new ArrayCollection();
-    }*/
+    }
 
     /** magic methods **/
     public function __toString()
@@ -72,10 +72,10 @@ class BlogTag
     	$this->name = $name;
     }
 
-    /*public function setPosts(ArrayCollection $posts)
+    public function setPosts(ArrayCollection $posts)
     {
         $this->posts = $posts;
-    }*/
+    }
 
     public function setSlug($slug)
     {
@@ -104,10 +104,10 @@ class BlogTag
         return $this->name;
     }
 
-    /*public function getPosts()
+    public function getPosts()
     {
         return $this->posts;
-    }*/
+    }
 
     public function getSlug()
     {
@@ -124,4 +124,9 @@ class BlogTag
         return $this->updatedAt;
     }
     /** end getters **/
+
+    public function addPost(BlogPost $post)
+    {
+        $this->posts[] = $post;
+    }
 }

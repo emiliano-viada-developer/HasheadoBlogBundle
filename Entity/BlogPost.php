@@ -56,6 +56,15 @@ class BlogPost
     protected $comments;
 
     /**
+     * @ORM\ManyToMany(targetEntity="BlogTag", inversedBy="posts")
+     * @ORM\JoinTable(name="blog_posts_tags",
+     *      joinColumns={@ORM\JoinColumn(name="blog_post_id", referencedColumnName="id")},
+     *      inverseJoinColumns={@ORM\JoinColumn(name="blog_tag_id", referencedColumnName="id")}
+     *      )
+     */
+    protected $tags;
+
+    /**
      * @ORM\Column(type="string", length=255, nullable=true, unique=true, options={"default"=NULL})
      */
     protected $slug;
@@ -74,6 +83,7 @@ class BlogPost
     public function __contruct()
     {
         $this->comments = new ArrayCollection();
+        $this->tags = new ArrayCollection();
     }
 
     /** magic methods **/
@@ -123,6 +133,11 @@ class BlogPost
     public function setComments(ArrayCollection $comments)
     {
         $this->comments = $comments;
+    }
+
+    public function setTags($tags)
+    {
+        $this->tags = array($tags);
     }
 
     public function setSlug($slug)
@@ -178,6 +193,11 @@ class BlogPost
         return $this->comments;
     }
 
+    public function getTags()
+    {
+        return $this->tags;
+    }
+
     public function getSlug()
     {
         return $this->slug;
@@ -193,4 +213,28 @@ class BlogPost
         return $this->updatedAt;
     }
     /** end getters **/
+
+    /**
+     * addTag() method
+     * @param BlogTag $tag
+     */
+    public function addTag(BlogTag $tag)
+    {
+        $tag->addPost($this);
+        $this->tags[] = $tag;
+    }
+
+    /**
+     * removeTag() method
+     * @param BlogTag $tag
+     */
+    public function removeTag(BlogTag $tag)
+    {
+        if (count($this->tags)) {
+            foreach ($this->tags as $k => $existingTag) {
+                if ($existingTag->getId() === $tag->getId())
+                    unset($this->tags[$k]);
+            }
+        }
+    }
 }

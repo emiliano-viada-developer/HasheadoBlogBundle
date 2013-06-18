@@ -40,5 +40,9 @@ class BlogCommentType extends AbstractType
 	    $resolver->setDefaults(array(
 	        'data_class' => 'Hasheado\BlogBundle\Entity\BlogComment',
 	    ));
+
+        $resolver->setOptional(array(
+            'em',
+        ));
 	}
 }

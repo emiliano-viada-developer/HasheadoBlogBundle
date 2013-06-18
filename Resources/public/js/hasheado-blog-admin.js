@@ -49,6 +49,34 @@
 				});
 				/* END Collapse div's content */
 
+				/* Chosen plugin - reference to jquery.chosen.min.js */
+				var dropDown = $('.chzn-select');
+				dropDown.chosen({});
+
+				//Extend chosen to add non-existing tag
+				dropDown.parent().find('.chzn-container .search-field input[type=text]').keydown( function (evt) {
+					var stroke, _ref, target, list;
+		            // get keycode
+		            stroke = (_ref = evt.which) != null ? _ref : evt.keyCode;
+		            target = $(evt.target);
+		            list = target.parents('.chzn-container').find('.chzn-choices li.search-choice > span').map(function () { return $(this).text(); }).get();
+           			//with "Tab" and "Enter" execute
+           			if (stroke === 9 || stroke === 13) {
+           				var value = $.trim(target.val());
+			            // if the option does not exists
+			            if ($.inArray(value,list) < 0) {
+			                var option = $('<option>');
+			                option.text(value).val(value).appendTo(dropDown);
+			                option.attr('selected','selected');
+			                // add the option and set as selected
+			            }
+			            // trigger the update event
+			            dropDown.trigger("liszt:updated");
+			            return false;
+           			}
+ 				});
+				/* END Chosen plugin */
+
 			},
 
 			/*
