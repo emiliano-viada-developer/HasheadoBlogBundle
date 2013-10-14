@@ -142,4 +142,26 @@ class BlogPostRepository extends EntityRepository
 
 	    return $posts;
 	}
+
+	/**
+	 * getUncategorized method
+	 * Returns uncategorized posts
+	 * @return ArrayCollection $posts
+	 */
+	public function getUncategorized()
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+
+		$qb->select('p')
+			->from('HasheadoBlogBundle:BlogPost', 'p')
+			->where('p.category IS NULL')
+			->andWhere('p.isPublished = 1')
+			->groupBy('p.id')
+	        ->addOrderBy('p.publishedAt', 'DESC');
+
+	    $posts = $qb->getQuery()->getResult();
+
+        return $posts;
+	}
 }

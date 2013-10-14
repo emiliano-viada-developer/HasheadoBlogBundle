@@ -3,7 +3,9 @@
 namespace Hasheado\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Doctrine\Common\Collections\ArrayCollection;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
+use Hasheado\BlogBundle\Entity\BlogCategory as Category;
 use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
 use Hasheado\BlogBundle\Util\Paginator;
 
@@ -74,17 +76,27 @@ class DefaultController extends Controller
     public function byCategoryAction($slug)
     {
         $em = $this->getDoctrine()->getManager();
-        $category = $em->getRepository('HasheadoBlogBundle:BlogCategory')->findOneBySlug($slug);
 
-        if (!$category) {
-            throw $this->createNotFoundException(
-                'No category found for slug '.$slug
-            );
+        if ($slug != 'uncategorized') {
+            $category = $em->getRepository('HasheadoBlogBundle:BlogCategory')->findOneBySlug($slug);
+
+            if (!$category) {
+                throw $this->createNotFoundException(
+                    'No category found for slug '.$slug
+                );
+            }
+            $posts = $category->getPosts();
+
+        } else {
+            $category = new Category(); //temporal
+            $category->setName('Uncategorized');
+            //Get uncategorized posts
+            $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->getUncategorized();
         }
 
         return $this->render('HasheadoBlogBundle:Default:by_category.html.twig', array(
             'category' => $category,
-            'posts' => $category->getPosts(),
+            'posts' => $posts,
         ));
     }
 }
