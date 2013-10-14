@@ -36,28 +36,6 @@ class DefaultController extends Controller
     	));
     }
 
-    /** Post detail action */
-    public function postDetailAction($slug)
-    {
-    	$em = $this->getDoctrine()->getManager();
-        $post = $em->getRepository('HasheadoBlogBundle:BlogPost')->findOneBySlug($slug);
-
-    	if (!$post) {
-            throw $this->createNotFoundException(
-                'No post found for slug '.$slug
-            );
-        }
-
-        $comment = new Comment();
-        $comment->setPost($post);
-        $comment_form = $this->createForm(new CommentType(), $comment);
-
-    	return $this->render('HasheadoBlogBundle:Default:post_detail.html.twig', array(
-    		'post' => $post,
-    		'form' => $comment_form->createView(),
-		));
-    }
-
     /** Comment action */
     public function commentAction()
     {

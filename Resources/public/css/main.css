@@ -99,6 +99,16 @@ p.footer-link {
 	margin-left: 5px;
 	color: #b94a48;
 }
+/* Post detail page */
+.post-detail h2 a {
+	color: #000;
+	text-decoration: none;
+	font-size: 28px;
+}
+.post-detail .leave-comment {
+	background-color: #eee;
+}
+/* END Post detail page */
 
 /* *************************************** */
 /* *************************************** */

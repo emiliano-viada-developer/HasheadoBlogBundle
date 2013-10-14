@@ -3,12 +3,12 @@ hasheado_blog_homepage:
     defaults: { _controller: HasheadoBlogBundle:Default:index, page: 1 }
 
 hasheado_blog_homepage_pagination:
-    pattern:  /{page}
+    pattern:  /page/{page}
     defaults: { _controller: HasheadoBlogBundle:Default:index, page: 1 }
 
 hasheado_blog_post_detail:
     pattern:  /{slug}
-    defaults: { _controller: HasheadoBlogBundle:Default:postDetail }
+    defaults: { _controller: HasheadoBlogBundle:BlogPost:postDetail }
 
 hasheado_blog_comment_post:
     pattern:  /comment/post
@@ -18,8 +18,8 @@ hasheado_blog_post_by_category:
     pattern:  /category/{slug}
     defaults: { _controller: HasheadoBlogBundle:Default:byCategory }
 
-#Admin routes
-
+#Admin routes #####
+#########################
 hasheado_blog_admin_login:
     pattern:   /admin/login
     defaults:  { _controller: HasheadoBlogBundle:Admin\Security:login }

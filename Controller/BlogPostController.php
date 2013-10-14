@@ -3,9 +3,37 @@
 namespace Hasheado\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Hasheado\BlogBundle\Entity\BlogComment as Comment;
+use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
 
 class BlogPostController extends Controller
 {
+	/** 
+	 * Post detail action
+	 * @param  string $slug
+	 * @return
+	 */
+    public function postDetailAction($slug)
+    {
+    	$em = $this->getDoctrine()->getManager();
+        $post = $em->getRepository('HasheadoBlogBundle:BlogPost')->findOneBySlug($slug);
+
+    	if (!$post) {
+            throw $this->createNotFoundException(
+                'No post found for slug '.$slug
+            );
+        }
+
+        $comment = new Comment();
+        $comment->setPost($post);
+        $comment_form = $this->createForm(new CommentType(), $comment);
+
+    	return $this->render('HasheadoBlogBundle:BlogPost:post_detail.html.twig', array(
+    		'post' => $post,
+    		'form' => $comment_form->createView(),
+		));
+    }
+
 	/**
 	 * archive Action
 	 * Shows posts by month (archive)

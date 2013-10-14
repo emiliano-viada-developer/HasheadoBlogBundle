@@ -1,0 +1,91 @@
+{% extends 'HasheadoBlogBundle::layout.html.twig' %}
+
+{% block content %}
+	<section class="post-detail clearfix row-fluide">
+	
+		<article>
+			<h2>
+				<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}" title="{{ post.title }}">
+					{{ post.title }}
+				</a>
+			</h2>
+
+			{{ post.content|raw }}
+		</article>
+
+		<h3>Comments</h3>
+
+		{% if post.comments|length > 0 %}
+			{% for comment in post.comments %}
+
+				{% if comment.isAccepted %}
+
+					<article>
+						<p>{{ comment.userName }} ({{ comment.userEmail }}) said:</p>
+						<p>{{ comment.content }}</p>
+					</article>
+
+				{% else %}
+
+					<p><a name="#comment-{{ comment.id }}"/>Your comment is waiting for moderation.</p>
+
+				{% endif %}
+
+			{% endfor %}
+		{% else %}
+			<p>No comments.</p>
+		{% endif %}
+
+		<div class="leave-comment clearfix ptl prl pbl pll mbl">
+			<h3 class="mbl">Leave your comment</h3>
+
+			<form action="{{ path('hasheado_blog_comment_post') }}" method="post">
+
+				<div class="row">
+				    
+				    <div class="span4">
+					    {{ form_label(form.userEmail, 'E-mail *') }}
+					    {{ form_errors(form.userEmail) }}
+					    {{ form_widget(form.userEmail) }}
+				    </div>
+
+				    <div class="span3">
+					    {{ form_label(form.userName, 'Username') }}
+					    {{ form_errors(form.userName) }}
+					    {{ form_widget(form.userName) }}
+					</div>
+
+				</div>				
+
+				<div class="row">
+				    <div class="span4">
+					    {{ form_label(form.web, 'Website') }}
+					    {{ form_errors(form.web) }}
+					    {{ form_widget(form.web) }}
+				    </div>
+				</div>
+
+				<div class="row">
+					<div class="span8">
+					    {{ form_label(form.content, 'Comment') }}
+					    {{ form_errors(form.content) }}
+					    {{ form_widget(form.content) }}
+				    </div>
+				</div>
+
+				<div class="row mtn">
+					<div class="span8">
+						{{ form_widget(form.post) }}
+						{{ form_rest(form) }}
+
+						<input class="btn btn-success" type="submit" name="submit_button" value="Comment" />
+						<span class="muted pln">* Required.</span>
+					</div>
+				</div>
+
+			</form>
+		</div>
+		
+	</section>
+
+{% endblock %}
