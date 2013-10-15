@@ -1,9 +1,10 @@
 <ul class="unstyled">
 	{% if months|length > 0 %}
 		{% for month, ps in months %}
+			{% set exploded = month|split(' ') %}
 			<li> 
 				<i class="icon-calendar"></i>
-				<a href="#">{{ month }} ({{ ps }})</a>
+				<a href="{{ path('hasheado_blog_post_archive', { 'year': exploded[0], 'month': monthArray[exploded[1]] }) }}">{{ month }} ({{ ps }})</a>
 			</li>
 		{% endfor %}
 	{% else %}

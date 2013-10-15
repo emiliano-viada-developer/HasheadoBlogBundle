@@ -8,6 +8,7 @@ use Hasheado\BlogBundle\Entity\BlogComment as Comment;
 use Hasheado\BlogBundle\Entity\BlogCategory as Category;
 use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
 use Hasheado\BlogBundle\Util\Paginator;
+use Hasheado\BlogBundle\Util\Util;
 
 class DefaultController extends Controller
 {
@@ -72,31 +73,24 @@ class DefaultController extends Controller
         }
     }
 
-    /** Posts by category */
-    public function byCategoryAction($slug)
+    /**
+     * archiveAction()
+     * @param int $year
+     * @param int $month
+     * @return
+     */
+    public function archiveAction($year, $month)
     {
         $em = $this->getDoctrine()->getManager();
 
-        if ($slug != 'uncategorized') {
-            $category = $em->getRepository('HasheadoBlogBundle:BlogCategory')->findOneBySlug($slug);
+        $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->getArchiveByDate($year, $month);
 
-            if (!$category) {
-                throw $this->createNotFoundException(
-                    'No category found for slug '.$slug
-                );
-            }
-            $posts = $category->getPosts();
+        $monthArray = array_flip(Util::monthNameToNumber());
 
-        } else {
-            $category = new Category(); //temporal
-            $category->setName('Uncategorized');
-            //Get uncategorized posts
-            $posts = $em->getRepository('HasheadoBlogBundle:BlogPost')->getUncategorized();
-        }
-
-        return $this->render('HasheadoBlogBundle:Default:by_category.html.twig', array(
-            'category' => $category,
+        return $this->render('HasheadoBlogBundle:Default:archive.html.twig', array(
             'posts' => $posts,
+            'year' => $year,
+            'month' => $monthArray[$month]
         ));
     }
 }

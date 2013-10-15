@@ -5,6 +5,7 @@ namespace Hasheado\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
 use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
+use Hasheado\BlogBundle\Util\Util;
 
 class BlogPostController extends Controller
 {
@@ -46,6 +47,7 @@ class BlogPostController extends Controller
 
 		return $this->render('HasheadoBlogBundle:BlogPost:archive.html.twig', array(
 			'months' => $months,
+			'monthArray' => Util::monthNameToNumber()
 		));
 	}
 

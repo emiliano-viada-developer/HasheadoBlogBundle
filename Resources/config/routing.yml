@@ -16,7 +16,11 @@ hasheado_blog_comment_post:
 
 hasheado_blog_post_by_category:
     pattern:  /category/{slug}
-    defaults: { _controller: HasheadoBlogBundle:Default:byCategory }
+    defaults: { _controller: HasheadoBlogBundle:BlogCategory:byCategory }
+
+hasheado_blog_post_archive:
+    pattern:  /archive/{year}/{month}
+    defaults: { _controller: HasheadoBlogBundle:Default:archive }
 
 #Admin routes #####
 #########################

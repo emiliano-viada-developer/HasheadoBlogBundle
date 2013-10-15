@@ -119,6 +119,37 @@ class BlogPostRepository extends EntityRepository
 	}
 
 	/**
+	 * getArchiveByDate method
+	 * Returns posts for given year and month
+	 * @return Array $posts
+	 */
+	public function getArchiveByDate($year, $month = null)
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+
+		$emConfig = $em->getConfiguration();
+	    $emConfig->addCustomDatetimeFunction('YEAR', 'Hasheado\BlogBundle\Mysql\Year');
+	    $emConfig->addCustomDatetimeFunction('MONTH', 'Hasheado\BlogBundle\Mysql\Month');
+		
+	    $qb->select('p')
+	        ->from('HasheadoBlogBundle:BlogPost', 'p')
+	        ->where('YEAR(p.publishedAt) = :p1')
+	        ->andWhere('p.isPublished = 1')
+	        ->orderBy('p.publishedAt', 'DESC')
+	        ->setParameter('p1', $year);
+
+	    if (!is_null($month)) {
+	    	$qb->andWhere('MONTH(p.publishedAt) = :p2')
+	    		->setParameter('p2', $month);
+	    }
+
+	    $result = $qb->getQuery()->getResult();
+
+	    return $result;
+	}
+
+	/**
 	 * getPopular method
 	 * Returns popular posts based on comments
 	 * @return ArrayCollection $posts
