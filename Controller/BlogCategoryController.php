@@ -3,6 +3,7 @@
 namespace Hasheado\BlogBundle\Controller;
 
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Hasheado\BlogBundle\Entity\BlogCategory as Category;
 
 class BlogCategoryController extends Controller
 {

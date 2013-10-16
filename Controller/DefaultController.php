@@ -5,7 +5,6 @@ namespace Hasheado\BlogBundle\Controller;
 use Symfony\Bundle\FrameworkBundle\Controller\Controller;
 use Doctrine\Common\Collections\ArrayCollection;
 use Hasheado\BlogBundle\Entity\BlogComment as Comment;
-use Hasheado\BlogBundle\Entity\BlogCategory as Category;
 use Hasheado\BlogBundle\Form\BlogCommentPostType as CommentType;
 use Hasheado\BlogBundle\Util\Paginator;
 use Hasheado\BlogBundle\Util\Util;

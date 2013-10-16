@@ -67,4 +67,29 @@ class BlogTagRepository extends EntityRepository
 
 		return $qb->getQuery();
 	}
+
+	/**
+	 * getPopular method
+	 * Returns popular tags based on posts
+	 * @return ArrayCollection $tags
+	 */
+	public function getPopular($records = 5)
+	{
+		$em = $this->getEntityManager();
+		$qb = $em->createQueryBuilder();
+		$months = array();
+		
+	    $qb->select('t', 'COUNT(p) AS num_posts')
+	        ->from('HasheadoBlogBundle:BlogTag', 't')
+	        ->leftJoin('t.posts', 'p')
+	        ->where('p.isPublished = 1')
+	        ->groupBy('t.id')
+	        ->addOrderBy('num_posts', 'DESC')
+	        ->addOrderBy('t.createdAt', 'DESC');
+
+	    $tags = $qb->getQuery()
+	    			->setMaxResults($records)->getResult();
+
+	    return $tags;
+	}
 }

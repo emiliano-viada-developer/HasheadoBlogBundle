@@ -1,0 +1,12 @@
+<ul class="unstyled">
+	{% if tags|length > 0 %}
+		{% for tag in tags %}
+			<li> 
+				<i class="icon-tag"></i>
+				<a href="{{ path('hasheado_blog_post_tags', { slug: tag[0].slug }) }}">{{ tag[0] }} ({{ tag.num_posts }})</a>
+			</li>
+		{% endfor %}
+	{% else %}
+		<li>No Tags.</li>
+	{% endif %}
+</ul>

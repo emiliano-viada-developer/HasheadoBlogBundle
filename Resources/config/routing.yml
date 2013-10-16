@@ -22,6 +22,10 @@ hasheado_blog_post_archive:
     pattern:  /archive/{year}/{month}
     defaults: { _controller: HasheadoBlogBundle:Default:archive }
 
+hasheado_blog_post_tags:
+    pattern:  /tags/{slug}
+    defaults: { _controller: HasheadoBlogBundle:BlogPost:byTag }
+
 #Admin routes #####
 #########################
 hasheado_blog_admin_login:

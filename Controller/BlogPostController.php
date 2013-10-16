@@ -65,4 +65,51 @@ class BlogPostController extends Controller
 			'posts' => $posts,
 		));
 	}
+
+	/**
+	 * tags Action
+	 * Shows Tags
+	 * @return
+	 */
+	public function tagsAction()
+	{
+		$em = $this->getDoctrine()->getManager();
+        $tags = $em->getRepository('HasheadoBlogBundle:BlogTag')->getPopular($this->container->getParameter('tags_sidebar'));
+
+		return $this->render('HasheadoBlogBundle:BlogPost:tags.html.twig', array(
+			'tags' => $tags,
+		));
+	}
+
+	/**
+	 * byTag Action
+	 * Shows posts by tag
+	 * @return
+	 */
+	public function byTagAction($slug)
+	{
+		$em = $this->getDoctrine()->getManager();
+        $tag = $em->getRepository('HasheadoBlogBundle:BlogTag')->findOneBySlug($slug);
+
+        if (!$tag) {
+            throw $this->createNotFoundException(
+                'No tag found for slug '.$slug
+            );
+        }
+
+        $posts = $tag->getPosts();
+
+        if (count($posts)) {
+        	foreach ($posts as $i => $post) {
+        		if (!$post->getIsPublished()) {
+        			unset($posts[$i]);
+        		}
+        	}
+        }
+
+		return $this->render('HasheadoBlogBundle:BlogPost:by_tag.html.twig', array(
+			'tag' => $tag,
+			'posts' => $posts,
+		));
+	}
 }

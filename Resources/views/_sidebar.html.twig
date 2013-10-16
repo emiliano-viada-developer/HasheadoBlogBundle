@@ -49,20 +49,7 @@
 	<div>
 		<h3 class="title">Popular Tags</h3>
 		<div>
-			<ul class="unstyled">
-				<li>
-					<i class="icon-tag"></i>
-					<a href="#">Symfony (4)</a>
-				</li>
-				<li>
-					<i class="icon-tag"></i>
-					<a href="#">PHP (3)</a>
-				</li>
-				<li>
-					<i class="icon-tag"></i>
-					<a href="#">Doctrine (1)</a>
-				</li>
-			</ul>
+			{% render(controller('HasheadoBlogBundle:BlogPost:tags')) %}
 		</div>
 	</div>
 

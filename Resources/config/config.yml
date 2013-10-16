@@ -5,6 +5,7 @@ parameters:
   post_in_homepage: 3
   popular_post_sidebar: 5
   comments_sidebar: 5
+  tags_sidebar: 5
 
 #Config for twig templates
 twig:
