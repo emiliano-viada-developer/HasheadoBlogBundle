@@ -61,7 +61,7 @@ class DefaultController extends Controller
                 );
 
             } else { //If it's not valid, render comment form with errors.
-                return $this->render('HasheadoBlogBundle:Default:post_detail.html.twig', array(
+                return $this->render('HasheadoBlogBundle:BlogPost:post_detail.html.twig', array(
                     'post' => $post,
                     'form' => $form->createView(),
                 ));

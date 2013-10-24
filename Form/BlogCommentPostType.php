@@ -3,6 +3,9 @@
 namespace Hasheado\BlogBundle\Form;
 
 use Symfony\Component\Form\FormBuilderInterface;
+use Symfony\Component\Form\FormEvent;
+use Symfony\Component\Form\FormEvents;
+use Symfony\Component\Form\FormError;
 use Hasheado\BlogBundle\Form\BlogCommentType;
 
 class BlogCommentPostType extends BlogCommentType
@@ -20,6 +23,18 @@ class BlogCommentPostType extends BlogCommentType
             'class' => 'Hasheado\BlogBundle\Entity\BlogPost',
             'hidden' => true,
         ));
+        //Hidden field to antispam
+        $builder->add('antispam', 'hidden', array(
+            'mapped' => false
+        ));
+        //Validate antispam field
+        $builder->addEventListener(FormEvents::POST_BIND, function(FormEvent $event) {
+            $form = $event->getForm();
+            $antispamValue = $form['antispam']->getData();
+            if (!empty($antispamValue)) {
+                $form->addError(new FormError('SPAM: You are a BOT!.'));
+            }
+        });
         $builder->add('content');
     }
 }
