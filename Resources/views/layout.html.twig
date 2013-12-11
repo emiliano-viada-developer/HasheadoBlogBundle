@@ -6,9 +6,13 @@
 	{% stylesheets 
 		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.css'
 		'bundles/hasheadoblog/bootstrap/css/bootstrap-classic.css'
+		'bundles/hasheadoblog/syntaxhighlighter/css/shCore.css'
+		'bundles/hasheadoblog/syntaxhighlighter/css/shCoreDefault.css'
+		'bundles/hasheadoblog/syntaxhighlighter/css/shThemeRDark.css'
 		'bundles/hasheadoblog/css/main.css'
 		'bundles/hasheadoblog/css/spaces.css' filter='cssrewrite' %}
 		<link rel="stylesheet" type="text/css" href="{{ asset_url }}" />
+
 	{% endstylesheets %}
 {% endblock stylesheets %}
 
@@ -42,7 +46,10 @@
 
 {% block javascripts %}
 	{% javascripts 'bundles/hasheadoblog/bootstrap/js/bootstrap.min.js'
-				   'bundles/hasheadoblog/bootstrap/js/bootstrap-modal.js' %}
+				   'bundles/hasheadoblog/bootstrap/js/bootstrap-modal.js'
+				   'bundles/hasheadoblog/syntaxhighlighter/js/shCore.js'
+				   'bundles/hasheadoblog/syntaxhighlighter/js/shBrushJScript.js'
+				   'bundles/hasheadoblog/js/hasheado-blog.js' %}
 		<script type="text/javascript" src="{{ asset_url }}"></script>
 
 	{% endjavascripts %}

@@ -29,8 +29,10 @@ class WysiwygType extends AbstractType
             $options['options']['plugins'] = 'link image code';
         }
         if (!isset($options['options']['menu'])) {
-            $options['options']['menu'] = 'undo redo visualaid cut copy paste selectall bold italic underline strikethrough 
-                    subscript superscript removeformat formats link image code';
+            $options['options']['menu'] = 'undo redo cut copy paste selectall bold italic underline strikethrough subscript superscript removeformat formats link image';
+        }
+        if (!isset($options['options']['toolbar'])) {
+            $options['options']['toolbar'] = $options['options']['menu'] . ' code';
         }
         $options['options']['image_advtab'] = true;
         $settings = null;
