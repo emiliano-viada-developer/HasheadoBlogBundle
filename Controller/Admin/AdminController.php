@@ -232,7 +232,7 @@ class AdminController extends Controller
         //Add extra choices to a choice field type in the form
         if ($this->entityName == 'post' && $request->isMethod('POST')) {
             $post = $request->request->get('post');
-            $tags = $post['tags'];
+            $tags = (isset($post['tags']))? $post['tags'] : null;
             $extra = array();
             if (count($tags)) {
                 foreach ($tags as $i => $val) {
