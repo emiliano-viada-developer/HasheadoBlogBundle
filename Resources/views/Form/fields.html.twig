@@ -1,9 +1,50 @@
 {% block wysiwyg_widget %}
     {% spaceless %}
         {{ block('textarea_widget') }}
+        <!--<iframe id="form_target" name="form_target" style="display:none"></iframe>-->
+		<input class="tinymce_image_uploader" name="image" type="file" style="display: none;">
         <script type="text/javascript">
             $(document).ready(function() {
-                tinymce.init({{ form.vars._settings|raw }});
+                var config = {{ form.vars._settings|raw }};
+                config.file_browser_callback = function(field_name, url, type, win) {
+		            if (type=='image')
+		            	$('.tinymce_image_uploader').click();
+		        };
+                tinymce.init(config);
+                //Ajax form tinymce_image_uploader
+                $('.tinymce_image_uploader').on('change', function(e) {
+                	var _this = $(e.currentTarget),
+                        form = $('<form></form>'),
+                        files = e.target.files;
+
+                    form.attr('action', '/blog/admin/upload');
+                    form.attr('method', 'post');
+                    form.attr('enctype', 'multipart/form-data');
+                    var inputFile = _this.clone();
+                    form.append(inputFile);
+
+                    var formData = new FormData();
+                    $.each(files, function(key, value) {
+                        formData.append(key, value);
+                    });
+                    
+                    $.ajax({
+                        type: 'POST',
+                        url: form.attr('action'),
+                        data: formData,
+                        processData: false,  
+                        contentType: false,
+                        success: function(data) {
+                            if (data.status) {
+                                $('.mce-btn.mce-open').parent().find('.mce-textbox').val(data.message);
+                            } else {
+                                alert(data.message);
+                            }
+                        }
+                    });
+
+                	_this.val('');
+                });
             });
         </script>
     {% endspaceless %}

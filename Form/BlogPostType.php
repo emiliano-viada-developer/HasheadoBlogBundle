@@ -24,7 +24,7 @@ class BlogPostType extends AbstractType
         $builder->add('title');
         $builder->add('content', 'wysiwyg', array(
             'required' => true,
-            'attr' => array('rows' => 25),
+            'attr' => array('rows' => 25)
         ));
         $builder->add('category', null, array(
             'empty_value' => 'Choose an option',

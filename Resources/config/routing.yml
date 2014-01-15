@@ -66,6 +66,11 @@ hasheado_blog_admin_post_delete:
     pattern: /admin/post/{id}/delete
     defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:delete }
 
+#upload a file
+hasheado_blog_admin_upload_file:
+    pattern: /admin/upload
+    defaults: { _controller: HasheadoBlogBundle:Admin\BlogPost:upload }
+
 #Category
 hasheado_blog_admin_category_list:
     pattern: /admin/categories
