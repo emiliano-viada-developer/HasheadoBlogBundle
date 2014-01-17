@@ -1,8 +1,10 @@
 {% extends 'HasheadoBlogBundle::layout.html.twig' %}
 
+{% set page_title = tag.name ~ ' Tag' %}
+
 {% block content %}
 	
-	<section>
+	<section class="by-tag">
 
 		<h1>{{ tag.name }} Tag</h1>
 

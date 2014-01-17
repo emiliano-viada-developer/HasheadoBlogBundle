@@ -1,6 +1,8 @@
 {% extends '::base.html.twig' %}
 
-{% block title %}Blog{% endblock %}
+{% block title %}
+	{% if page_title is defined %} {{ page_title }} | {% endif %} Hasheado Blog
+{% endblock %}
 
 {% block stylesheets %}
 	{% stylesheets 

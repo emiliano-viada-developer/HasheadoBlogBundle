@@ -1,8 +1,10 @@
 {% extends 'HasheadoBlogBundle::layout.html.twig' %}
 
+{% set page_title = 'Archive ' ~ year ~ ' ' ~ month %}
+
 {% block content %}
 	
-	<section>
+	<section class="archive">
 
 		<h1>Archive {{ year }} {{ month }}</h1>
 

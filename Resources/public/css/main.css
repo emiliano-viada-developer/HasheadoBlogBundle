@@ -41,12 +41,23 @@ aside.rightbar {
 	border-radius: 0 14px 14px 0;
 	margin-left: -5px;
 }
-.homepage article {
+.by-category h1,
+.archive h1,
+.by-tag h1 {
+	margin-bottom: 15px;
+}
+.homepage article,
+.by-category article,
+.archive article,
+.by-tag article {
 	border-bottom: 1px solid #e6e6e6;
 	padding-bottom: 20px;
 	margin-bottom: 30px;
 }
-.homepage article:last-child {
+.homepage article:last-child,
+.by-category article:last-child,
+.archive article:last-child,
+.by-tag article:last-child {
 	border-bottom: 0;
 }
 .homepage article header p{
