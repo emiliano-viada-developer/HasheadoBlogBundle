@@ -5,8 +5,9 @@
 {% endblock %}
 
 {% block stylesheets %}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
 	{% stylesheets 
-		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.css'
+		'bundles/hasheadoblog/bootstrap/css/bootstrap-responsive.min.css'
 		'bundles/hasheadoblog/bootstrap/css/bootstrap-classic.css'
 		'bundles/hasheadoblog/syntaxhighlighter/css/shCore.css'
 		'bundles/hasheadoblog/syntaxhighlighter/css/shCoreDefault.css'
@@ -20,29 +21,33 @@
 
 {% block body %}
 	
-	<!-- Header nav -->
-	{% include 'HasheadoBlogBundle::_header_nav.html.twig' %}
+	<div class="row-fluid">
 
-	<div class="container" id="container">
+		<!-- Header nav -->
+		{% include 'HasheadoBlogBundle::_header_nav.html.twig' %}
 
-		<div class="row fluide">
+		<div class="container" id="container">
 
-			<!-- Main content -->
-			<div class="span8 clearfix">
-				{% block content %}{% endblock %}
+			<div class="row fluide">
+
+				<!-- Main content -->
+				<div class="span8 clearfix">
+					{% block content %}{% endblock %}
+				</div>
+
+				<!-- Sidebar -->
+				<aside class="span4 rightbar">
+					{% include 'HasheadoBlogBundle::_sidebar.html.twig' %}
+				</aside>
+				
 			</div>
 
-			<!-- Sidebar -->
-			<aside class="span4 rightbar">
-				{% include 'HasheadoBlogBundle::_sidebar.html.twig' %}
-			</aside>
-			
-		</div>
+		</div> <!-- END main container -->
 
-	</div> <!-- END main container -->
+		<!-- Footer -->
+		{% include 'HasheadoBlogBundle::_footer.html.twig' %}
 
-	<!-- Footer -->
-	{% include 'HasheadoBlogBundle::_footer.html.twig' %}	
+	</div>
 
 {% endblock %}
 

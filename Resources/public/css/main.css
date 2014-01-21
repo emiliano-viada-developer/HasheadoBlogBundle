@@ -2,9 +2,8 @@
  * main.css CSS file for admin @HasheadoBlogBundle
  * @author Emiliano Viada
  */
-.container,
-.navbar .container {
-	width: 1170px;
+.container {
+	/*width: 1170px;*/
 }
 #header-wrapper {
 	padding: 20px 0;
@@ -110,6 +109,12 @@ p.footer-link {
 	margin-left: 5px;
 	color: #b94a48;
 }
+/* nav */
+.navbar .nav.pull-right {
+    float: right;
+    margin-right: 50px;
+}
+/* END nav */
 /* Post detail page */
 .post-detail h2 a {
 	color: #000;
@@ -120,7 +125,9 @@ p.footer-link {
 	background-color: #eee;
 }
 /* END Post detail page */
-
+.w200 {
+	width: 200px !important;
+}
 /* *************************************** */
 /* *************************************** */
 /* Overide Bootstrap CSS */
@@ -159,3 +166,70 @@ input[type="text"] {
 	margin-top: -2px;
 }
 /* END Overide Bootstrap CSS */
+/* *************************************** */
+/* Media Queries */
+/* Landscape phone to portrait tablet */
+@media (max-width: 767px) {
+	body {
+		padding: 0;
+	}
+	.container {
+		width: auto;
+	}
+	.offset2 {
+		margin-left: 50px !important;
+	}
+	.row-fluid .span3 {
+		width: 46.8%;
+	}
+	.row-fluid .span3:first-child {
+		margin-left: 2.127659574%;
+	}
+	.navbar-search .search-query {
+		margin-bottom: 18px;
+	}
+	.right-menu li:first-child {
+		display: inline-block;
+		width: 75px;
+	}
+}
+/* max-width: 979px; */
+@media (max-width: 979px) {
+	.nav-collapse .nav>li>a,
+	.nav-collapse .dropdown-menu a {
+		font-weight: normal;
+	}
+	.navbar-inverse .nav-collapse .navbar-form,
+	.navbar-inverse .nav-collapse .navbar-search {
+		border: none;
+	}
+	.nav-collapse .navbar-form,
+	.nav-collapse .navbar-search {
+		float: inherit;
+		padding: inherit;
+		margin: 6px 0 0;
+	}
+	.nav-collapse .dropdown-menu {
+		margin: 0;
+	}
+}
+/* max-width: 979px; and min-width: 768px; */
+@media (max-width: 979px) and (min-width: 768px) {
+	.container {
+		width: 724px;
+	}
+}
+/* Landscape phones and down */
+@media (max-width: 480px) { 
+	footer .container {
+		padding: 0 20px;
+	}
+	.row-fluid .span3:first-child {
+		margin-left: 0;
+	}
+	.row-fluid .span3 {
+		width: 100%;
+		margin-left: 0;
+	}
+}
+/* END Media Queries */
