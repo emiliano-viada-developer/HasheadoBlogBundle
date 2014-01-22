@@ -41,17 +41,17 @@
 		<div class="leave-comment clearfix ptl prl pbl pll mbl">
 			<h3 class="mbl">Leave your comment</h3>
 
-			<form action="{{ path('hasheado_blog_comment_post') }}" method="post">
+			<form action="{{ path('hasheado_blog_comment_post') }}" method="post" class="comment-form">
 
 				<div class="row">
 				    
-				    <div class="span4">
+				    <div class="span6">
 					    {{ form_label(form.userEmail, 'E-mail *') }}
 					    {{ form_errors(form.userEmail) }}
 					    {{ form_widget(form.userEmail) }}
 				    </div>
 
-				    <div class="span3">
+				    <div class="span6">
 					    {{ form_label(form.userName, 'Username') }}
 					    {{ form_errors(form.userName) }}
 					    {{ form_widget(form.userName) }}
