@@ -179,6 +179,9 @@ input[type="text"] {
 	.container {
 		width: auto;
 	}
+	.container-fluid {
+		padding: 0 20px;
+	}
 	.offset2 {
 		margin-left: 50px !important;
 	}
@@ -202,6 +205,10 @@ input[type="text"] {
 	.row-fluid .span4 {
 		padding-right: 20px;
 	}
+	.row-fluid .span4.box {
+		padding-right: 0;
+		margin-left: 10px;
+	}
 	.row-fluid .span8 section {
 		padding: 0 20px;
 	}
@@ -209,6 +216,9 @@ input[type="text"] {
 		border-top: 1px solid #d3d3d3;
 		border-left: 0;
 		padding-top: 20px;
+	}
+	.login-box {
+		width: 95% !important;
 	}
 }
 /* max-width: 979px; */
@@ -249,6 +259,12 @@ input[type="text"] {
 	input {
 		width: auto;
 	}
+	.nav-collapse, .nav-collapse.collapse {
+		height: auto;
+	}
+	.navbar .btn-navbar {
+		display: none;
+	}
 }
 /* Landscape phones and down */
 @media (max-width: 480px) { 
@@ -264,6 +280,29 @@ input[type="text"] {
 	}
 	.offset2 {
 		margin-left: 25px !important;
+	}
+	.brand {
+		width: 218px;
+	}
+	.top-50 {
+		top: 5px;
+	}
+}
+@media (max-width: 400px) { 
+	.brand {
+		width: 162px;
+	}
+}
+@media (max-width: 320px) { 
+	.brand {
+		width: 116px;
+	}
+	.navbar .btn-navbar {
+		margin-right: -20px;
+		margin-top: 15px;
+	}
+	.navbar .btn-group {
+		margin-top: 10px;
 	}
 }
 /* END Media Queries */

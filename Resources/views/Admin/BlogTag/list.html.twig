@@ -44,11 +44,11 @@
 				                    <td>{{ tag.id }}</td>
 				                    <td>{{ tag.name }}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_tag_edit', { 'id': tag.id }) }}">
-				                    		<i class="icon-pencil"></i> Edit
+				                    	<a href="{{ path('hasheado_blog_admin_tag_edit', { 'id': tag.id }) }}" title="Edit">
+				                    		<i class="icon-pencil"></i> <span class="hidden-phone">Edit</span>
 				                    	</a> &nbsp;&nbsp;
-				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_tag_delete', { 'id': tag.id }) }}">
-				                    		<i class="icon-remove"></i> Delete
+				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_tag_delete', { 'id': tag.id }) }}" title="Delete">
+				                    		<i class="icon-remove"></i> <span class="hidden-phone">Delete</span>
 				                    	</a>
 				                    </td>
 				                </tr>

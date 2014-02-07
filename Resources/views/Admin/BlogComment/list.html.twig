@@ -50,11 +50,11 @@
 				                    <td>{{ comment.content }}</td>
 				                    <td>{% if comment.isAccepted %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_comment_edit', { 'id': comment.id }) }}">
-				                    		<i class="icon-pencil"></i> Edit
+				                    	<a href="{{ path('hasheado_blog_admin_comment_edit', { 'id': comment.id }) }}" title="Edit">
+				                    		<i class="icon-pencil"></i> <span class="hidden-phone">Edit</span>
 				                    	</a> &nbsp;&nbsp;
-				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment.id }) }}">
-				                    		<i class="icon-remove"></i> Delete
+				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_comment_delete', { 'id': comment.id }) }}" title="Delete">
+				                    		<i class="icon-remove"></i> <span class="hidden-phone">Delete</span>
 				                    	</a>
 				                    </td>
 				                </tr>

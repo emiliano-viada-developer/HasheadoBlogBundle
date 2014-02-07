@@ -35,7 +35,10 @@
 								</a>
 							</th>
 							<th>Category</th>
-							<th>Published</th>
+							<th>
+								<span class="hidden-phone">Published</span>
+								<span class="visible-phone">Pbd</span>
+							</th>
 							<th>Actions</th>
 						</tr>
 					</thead>
@@ -48,11 +51,11 @@
 				                    <td>{{ post.category }}</td>
 				                    <td>{% if post.isPublished %}<i class="icon-ok"></i>{% else %}-{% endif %}</td>
 				                    <td>
-				                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}">
-				                    		<i class="icon-pencil"></i> Edit
+				                    	<a href="{{ path('hasheado_blog_admin_post_edit', { 'id': post.id }) }}" title="Edit">
+				                    		<i class="icon-pencil"></i> <span class="hidden-phone">Edit</span>
 				                    	</a> &nbsp;&nbsp;
-				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}">
-				                    		<i class="icon-remove"></i> Delete
+				                    	<a class="confirm-delete" href="{{ path('hasheado_blog_admin_post_delete', { 'id': post.id }) }}" title="Delete">
+				                    		<i class="icon-remove"></i> <span class="hidden-phone">Delete</span>
 				                    	</a>
 				                    </td>
 				                </tr>
