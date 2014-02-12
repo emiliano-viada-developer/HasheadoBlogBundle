@@ -33,6 +33,7 @@ aside.rightbar {
 	-webkit-border-radius: 14px 0 0 14px;
 	-moz-border-radius: 14px 0 0 14px;
 	border-radius: 14px 0 0 14px;
+	padding-left: 10px;
 }
 .form-search .input-append .btn {
 	-webkit-border-radius: 0 14px 14px 0;

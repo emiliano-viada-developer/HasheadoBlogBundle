@@ -92,4 +92,27 @@ class DefaultController extends Controller
             'month' => $monthArray[$month]
         ));
     }
+
+    /** Search */
+    public function searchAction($page = 1)
+    {
+        $em = $this->getDoctrine()->getManager();
+        $qb = $em->createQueryBuilder();
+        $request = $this->get('request');
+        $q = $request->query->get('q');
+
+        $posts = $qb->select('p')
+                    ->from('HasheadoBlogBundle:BlogPost', 'p')
+                    ->where('p.isPublished = :p1')
+                    ->andWhere('p.title LIKE :p2 OR p.content LIKE :p2')
+                    ->setParameter('p1', 1)
+                    ->setParameter('p2', '%' . $q . '%')
+                    ->orderBy('p.publishedAt', 'DESC')
+                    ->getQuery()
+                    ->getResult();
+
+        return $this->render('HasheadoBlogBundle:Default:search.html.twig', array(
+            'posts' => $posts,
+        ));
+    }
 }

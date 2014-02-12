@@ -26,6 +26,10 @@ hasheado_blog_post_tags:
     pattern:  /tags/{slug}
     defaults: { _controller: HasheadoBlogBundle:BlogPost:byTag }
 
+hasheado_blog_search:
+    pattern:  /search/query
+    defaults: { _controller: HasheadoBlogBundle:Default:search, page: 1 }
+
 #Admin routes #####
 #########################
 hasheado_blog_admin_login:

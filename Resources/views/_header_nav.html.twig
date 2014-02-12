@@ -27,8 +27,8 @@
 						</li>
 					</ul>
 					
-					<form action="/search" class="navbar-search pull-left">
-						<input class="search-query w200" name="q" placeholder="Search" type="text">
+					<form class="navbar-search pull-left" method="get" action="{{ path('hasheado_blog_search') }}">
+						<input class="search-query w200" name="q" placeholder="Search" type="text" value="{{ app.request.get('q') }}">
 					</form>
 				</div>
 				
