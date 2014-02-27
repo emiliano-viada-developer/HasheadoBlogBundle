@@ -43,12 +43,8 @@ class EntityIdType extends AbstractType
      */
     public function buildForm(FormBuilderInterface $builder, array $options)
     {
-        if ('2' == Kernel::MAJOR_VERSION && '2' < Kernel::MINOR_VERSION) {
-            $em = $this->registry->getEntityManager($options['em']);
-        } else {
-            $em = $this->registry->getManager($options['em']);
-        }
-
+        $em = $this->registry->getManager($options['em']);
+        
         $builder->addModelTransformer(new EntityToIdTransformer(
             $em,
             $options['class'],
