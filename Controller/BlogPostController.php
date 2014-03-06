@@ -16,6 +16,10 @@ class BlogPostController extends Controller
 	 */
     public function postDetailAction($slug)
     {
+    	//Redirect if slug = admin
+    	if ($slug === 'admin')
+    		return $this->redirect($this->generateUrl('hasheado_blog_admin_dashboard'));
+
     	$em = $this->getDoctrine()->getManager();
         $post = $em->getRepository('HasheadoBlogBundle:BlogPost')->findOneBySlug($slug);
 
