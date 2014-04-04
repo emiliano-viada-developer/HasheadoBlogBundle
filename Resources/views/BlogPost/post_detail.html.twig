@@ -6,11 +6,7 @@
 	<section class="post-detail clearfix row-fluide">
 	
 		<article>
-			<h2>
-				<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}" title="{{ post.title }}">
-					{{ post.title }}
-				</a>
-			</h2>
+			<h1>{{ post.title }}</h1>
 
 			{{ post.content|raw }}
 		</article>
