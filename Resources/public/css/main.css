@@ -60,7 +60,8 @@ aside.rightbar {
 .by-tag article:last-child {
 	border-bottom: 0;
 }
-.homepage article header p{
+.homepage article header p,
+.post-detail article header p{
 	color: #c3c3c3;
 }
 footer {
