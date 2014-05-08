@@ -12,3 +12,14 @@ services:
         class: Hasheado\BlogBundle\Form\Type\WysiwygType
         tags:
             - { name: form.type, alias: wysiwyg }
+    hasheado_blog.socialBarHelper:
+        class : Hasheado\BlogBundle\Templating\Helper\SocialBarHelper
+        tags : 
+          - {name : 'templating.helper', alias : 'social-buttons'}
+        arguments : [ @templating ]
+
+    twig.extension.hasheado_social_bar:
+        class: Hasheado\BlogBundle\Twig\Extensions\HasheadoTwigSocialBar
+        tags:
+            - { name: 'twig.extension' }
+        arguments : [ @service_container ]

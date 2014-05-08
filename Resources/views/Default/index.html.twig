@@ -18,6 +18,10 @@
 						</p>
 					</header>
 					<p>{{ post.content|raw }}</p>
+
+					<div class="social-bar">
+						<span>Compártelo: </span> {{ socialButtons() }}
+					</div>
 				</article>
 			{% endfor %}
 

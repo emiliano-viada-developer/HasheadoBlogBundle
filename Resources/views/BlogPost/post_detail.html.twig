@@ -15,6 +15,10 @@
 			{{ post.content|raw }}
 		</article>
 
+		<div class="social-bar">
+			<span>Compártelo: </span> {{ socialButtons() }}
+		</div>
+
 		<h3>Comments</h3>
 
 		{% if post.comments|length > 0 %}
