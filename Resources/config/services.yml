@@ -23,3 +23,8 @@ services:
         tags:
             - { name: 'twig.extension' }
         arguments : [ @service_container ]
+
+    twig.hasheado_locale_extension:
+        class: Hasheado\BlogBundle\Twig\Extensions\HasheadoLocaleExtension
+        tags:
+            - { name: twig.extension }

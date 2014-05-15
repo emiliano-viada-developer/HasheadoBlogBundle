@@ -13,7 +13,9 @@
 							<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}">{{ post.title }}</a>
 						</h1>
 						<p>Posted on
-							<time datetime="{{ post.publishedAt.format('c') }}">{{ post.publishedAt.format('F jS Y') }}</time> -
+							<time datetime="{{ post.publishedAt.format('c') }}">
+								{{ post.publishedAt | localeDate('long', 'none', app.request.locale) }}
+							</time> -
 							<a href="{{ path('hasheado_blog_post_detail', { 'slug': post.slug }) }}#comments">{{ post.comments|length }} comments</a>
 						</p>
 					</header>
